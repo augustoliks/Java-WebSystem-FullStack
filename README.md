@@ -2,8 +2,8 @@
 
 Desenvolvedores:
 
-> * Carlos Augusto dos Santos Neto ( [github](https://github.com/augustoliks) )
-> * Gabriel Koyama Alves ( [github](https://github.com/Gabrielkoyamao) )
+> * Carlos Augusto dos Santos Neto (visite o seu [github](https://github.com/augustoliks))
+> * Gabriel Koyama Alves (visite o seu [github](https://github.com/Gabrielkoyamao))
 
 ---
 
