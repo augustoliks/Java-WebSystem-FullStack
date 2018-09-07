@@ -1,4 +1,9 @@
-# LocadoraDeVeiculos
+# Sistema web completo para uma locadora de veículos
+
+Desenvolvedores:
+
+> * Carlos Augusto dos Santos Neto ( [github](https://github.com/augustoliks) )
+> * Gabriel Koyama Alves ( [github](https://github.com/Gabrielkoyamao) )
 
 ---
 
@@ -25,7 +30,14 @@
 
 ---
 
+
+# Diagrama de caso de uso
+
+![diagrama-caso-uso.jpg](.images/diagrama-caso-uso.jpg)
+
+
 # Comportamento esperado das funcionalidades 
+
 Mínimos além dos que são evidentes pelo diagrama
 
 > * UC.1. CRUD das reservas.
@@ -35,7 +47,7 @@ Mínimos além dos que são evidentes pelo diagrama
 
 ---
 
-# Detalhamento aplicável:
+# Detalhamento aplicável (Entidades):
 
 Requisitos de dados (mínimos além dos que são evidentes pelo diagrama):
 
