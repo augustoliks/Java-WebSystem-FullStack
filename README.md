@@ -1,4 +1,4 @@
-# Sistema web completo para uma locadora de veículos
+# Sistema web para uma locadora de veículos
 
 Desenvolvedores:
 
