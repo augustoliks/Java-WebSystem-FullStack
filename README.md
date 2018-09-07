@@ -4,24 +4,24 @@
 
 # Requisitos do Sistema
 
-1. Utilizar a linguagem Java (Versão 8 ou superior) no back end;
-2. Utilizar DAO ou JPA com provedor Hibernate (5 ou superior) para persistência de dados;
-3. Utilizar o padrão de projeto MVC na arquitetura do sistema;
-4. Utilizar Servlets anotados ou com descritor de implantação;
-5. Utilizar Java Server Pages para criar páginas dinâmicas (tipo templates);
-6. Utilizar JavaScript (JS) no front end;
-7. Utilizar JS Closures;
-8. Utilizar JS DOM Handlers;
-9. Utilizar JS event listeners;
-10. Utilizar JS para criar dinamicamente elementos no DOM.
-11 Utilizar métodos da JQuery;
-12. Utilizar marcação HTML 5 com sintaxe e semântica adequados;
-13. Utilizar CSS 3 no front end;
-14. Utilizar CSS 3 com fonte externa nas interfaces;
-15. Utilizar CSS 3 media queries;
-16. Utilizar CSS 3 para deixar o sistema “minimamente responsivo”;
-17. Utilizar as bases de dados MySQL ou MariaDB para persistência de dados;
-18. Utilizar o Apache TomCat como web container;
+> * 1: Utilizar a linguagem Java (Versão 8 ou superior) no back end;
+> * 2: Utilizar DAO ou JPA com provedor Hibernate (5 ou superior) para persistência de dados;
+> * 3: Utilizar o padrão de projeto MVC na arquitetura do sistema;
+> * 4: Utilizar Servlets anotados ou com descritor de implantação;
+> * 5: Utilizar Java Server Pages para criar páginas dinâmicas (tipo templates);
+> * 6: Utilizar JavaScript (JS) no front end;
+> * 7: Utilizar JS Closures;
+> * 8: Utilizar JS DOM Handlers;
+> * 9: Utilizar JS event listeners;
+> * 10: Utilizar JS para criar dinamicamente elementos no DOM.
+> * 11: Utilizar métodos da JQuery;
+> * 12: Utilizar marcação HTML 5 com sintaxe e semântica adequados;
+> * 13: Utilizar CSS 3 no front end;
+> * 14: Utilizar CSS 3 com fonte externa nas interfaces;
+> * 15: Utilizar CSS 3 media queries;
+> * 16: Utilizar CSS 3 para deixar o sistema “minimamente responsivo”;
+> * 17: Utilizar as bases de dados MySQL ou MariaDB para persistência de dados;
+> * 18: Utilizar o Apache TomCat como web container;
 
 ---
 
