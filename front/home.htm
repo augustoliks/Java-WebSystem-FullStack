@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+	<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" type="text/css" href="./style.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+
+	<title>Hello, world!</title>
+	</head>
+	<body>
+
+	<!-- / dps passar pra classe certinho-->
+
+	<style>
+
+		.btn-red {
+		    background-color: red; /* Green */
+		    border: none;
+		    color: white;
+		    padding: 15px 32px;
+		    text-align: center;
+		    text-decoration: none;
+		    display: inline-block;
+		    font-size: 16px;
+		    font-weight: bold;
+		    width: 200px;
+		    border-radius:20px;
+		}
+
+		.btn-gray {
+		    background-color: gray; /* Green */
+		    border: none;
+		    color: white;
+		    padding: 15px 32px;
+		    text-align: center;
+		    text-decoration: none;
+		    display: inline-block;
+		    font-size: 16px;
+		    font-weight: bold;
+		    width: 200px;
+		    border-radius:20px;
+		}
+
+		.btn-red:hover {
+			background-color: black;
+		}
+
+		.btn-gray:hover {
+			background-color: black;
+		}
+
+		.center {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+
+		}
+
+		/* modal */
+
+		.modal {
+			display: none; /* Hidden by default */
+			position: fixed; /* Stay in place */
+			z-index: 1; /* Sit on top */
+			padding-top: 100px; /* Location of the box */
+			left: 0;
+			top: 0;
+			width: 100%; /* Full width */
+			height: 100%; /* Full height */
+			overflow: auto; /* Enable scroll if needed */
+			background-color: rgb(0,0,0); /* Fallback color */
+			background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+		}
+
+		/* Modal Content */
+		.modal-content {
+			background-color: #fefefe;
+			margin: auto;
+			padding: 20px;
+			border: 1px solid #888;
+			width: 80%;
+		}
+
+		/* The Close Button */
+		.close {
+			color: #aaaaaa;
+			float: right;
+			font-size: 28px;
+			font-weight: bold;
+		}
+
+		.close:hover,
+		.close:focus {
+			color: #000;
+			text-decoration: none;
+			cursor: pointer;
+		}
+
+	</style>
+
+	<div>
+		<input type="text" width="20%" placeholder="Pesquise koyata" st1yle="margin-top:5px">
+		<i class="fas fa-search" style="margin-top:2px"></i>
+	</div>
+
+
+	<img src="./koyata.png" class="center" style="margin-top:15%">
+
+	<div>
+		<div style="width: 100%; overflow:hidden; margin-bottom: 150px">
+			<div style="width: 5%; float:left">
+				<ul>
+					<a href="#div1"><li style="font-size:35px; color:green" active></li></a>
+					<a href="#div2"><li style="font-size:35px;color:orange"></li></a>
+					<a href="#div3"><li style="font-size:35px;color:red"></li></a>
+					<a href="#div4"><li style="font-size:35px;color:blue"></li></a>
+				</ul>
+			</div>
+			<div style="width: 95%; float:center">
+				<button id="btnCadastro" class="btn-red center" style="margin-top:50px"> CADASTRAR</button>
+				<br/>
+				<button id="btnLogin" class="btn-gray center"> ENTRAR</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- The Cadastro Modal -->
+	<div id="cadastro" class="modal">
+
+		<!-- Modal content -->
+		<div class="modal-content" style="border-radius:20px;text-align:center">
+			<span class="close">×</span>
+			<h3 style="text-align:center">Cadastro</h3>
+
+				<div>
+					<label style="margin-right: 10px">Nome Completo</label>
+					<input type="text">
+				</div>
+
+				<div>
+					<label>RG</label>
+					<input type="text">
+				</div>
+
+				<div>
+					<label>CPF</label>
+					<input type="text">
+				</div>
+
+				<div>
+					<label>Endereco</label>
+					<input type="text">
+				</div>
+
+				<div>
+					<label>Email</label>
+					<input type="text">
+				</div>
+
+				<div>
+					<label>Senha</label>
+					<input type="password">
+				</div>
+		</div>
+
+	</div>
+
+		<!-- The Cadastro Modal -->
+	<div id="login" class="modal">
+
+		<!-- Modal content -->
+		<div class="modal-content" style="border-radius:20px;text-align:center" >
+			<span class="close">×</span>
+			<h3 >Entrar</h3>
+				<div>
+					<label>Login</label>
+					<input type="text">
+				</div>
+
+				<div>
+					<label>Senha</label>
+					<input type="password">
+				</div>
+		</div>
+
+	</div>
+
+	<section style="background-color:green; height: 300px;" id="div1" >
+	</section>
+
+	<section style="background-color:orange; height: 300px;" id="div2" >
+	</section>
+
+	<section style="background-color:red; height: 300px;" id="div3" >
+	</section>
+
+	<section style="background-color:blue; height: 300px;" id="div4" >
+	</section>
+
+	<script>
+		var modal = document.getElementById('cadastro');
+		var modalL = document.getElementById('login');
+		
+		var btn = document.getElementById("btnCadastro");
+		var btnL = document.getElementById("btnLogin");
+		
+		var span = document.getElementsByClassName("close")[0];
+		var spanL = document.getElementsByClassName("close")[0];
+		
+		btn.onclick = function() {
+			modal.style.display = "block";
+		}
+
+		btnL.onclick = function() {
+			modalL.style.display = "block";
+		}
+		
+		span.onclick = function() {
+			modal.style.display = "none";
+			modalL.style.display = "none";
+		}
+
+		spanL.onclick = function() {
+			modal.style.display = "none";
+			modalL.style.display = "none";
+		}
+		
+		window.onclick = function(event) {
+			if (event.target == modal || event.target == modalL) {
+				modal.style.display = "none";
+				modalL.style.display = "none";
+			}
+		}
+	</script>
+  
+ 	</body>	
+</html>
