@@ -4,102 +4,11 @@
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="stylesheet" type="text/css" href="./style.css">
+	<link rel="stylesheet" href="./home_style.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-
-
 	<title>Tela Home</title>
 	</head>
 	<body>
-
-	<!-- / dps passar pra classe certinho-->
-
-	<style>
-
-		.btn-red {
-		    background-color: red; /* Green */
-		    border: none;
-		    color: white;
-		    padding: 15px 32px;
-		    text-align: center;
-		    text-decoration: none;
-		    display: inline-block;
-		    font-size: 16px;
-		    font-weight: bold;
-		    width: 200px;
-		    border-radius:20px;
-		}
-
-		.btn-gray {
-		    background-color: gray; /* Green */
-		    border: none;
-		    color: white;
-		    padding: 15px 32px;
-		    text-align: center;
-		    text-decoration: none;
-		    display: inline-block;
-		    font-size: 16px;
-		    font-weight: bold;
-		    width: 200px;
-		    border-radius:20px;
-		}
-
-		.btn-red:hover {
-			background-color: black;
-		}
-
-		.btn-gray:hover {
-			background-color: black;
-		}
-
-		.center {
-			display: block;
-			margin-left: auto;
-			margin-right: auto;
-
-		}
-
-		/* modal */
-
-		.modal {
-			display: none; /* Hidden by default */
-			position: fixed; /* Stay in place */
-			z-index: 1; /* Sit on top */
-			padding-top: 100px; /* Location of the box */
-			left: 0;
-			top: 0;
-			width: 100%; /* Full width */
-			height: 100%; /* Full height */
-			overflow: auto; /* Enable scroll if needed */
-			background-color: rgb(0,0,0); /* Fallback color */
-			background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-		}
-
-		/* Modal Content */
-		.modal-content {
-			background-color: #fefefe;
-			margin: auto;
-			padding: 20px;
-			border: 1px solid #888;
-			width: 80%;
-		}
-
-		/* The Close Button */
-		.close {
-			color: #aaaaaa;
-			float: right;
-			font-size: 28px;
-			font-weight: bold;
-		}
-
-		.close:hover,
-		.close:focus {
-			color: #000;
-			text-decoration: none;
-			cursor: pointer;
-		}
-
-	</style>
 
 	<div>
 		<input type="text" width="20%" placeholder="Pesquise koyata" st1yle="margin-top:5px">
@@ -107,16 +16,21 @@
 	</div>
 
 
-	<img src="./koyata.png" class="center" style="margin-top:15%">
+	<img id="imagem_fundo" src="./koyata.png" class="center" style="margin-top:15%">
 
+	<div id="fundo1" hidden style="height: 400px; background-color: black">
+		<h1 style="color:white;text-align:center">testando</h1>
+		<button id="voltar_home" class="center btn-gray"> voltar </button>
+	</div>
+	
 	<div>
 		<div style="width: 100%; overflow:hidden; margin-bottom: 150px">
 			<div style="width: 5%; float:left">
 				<ul>
-					<a href="#div1"><li style="font-size:35px; color:black" active></li></a>
-					<a href="#div2"><li style="font-size:35px;color:black"></li></a>
-					<a href="#div3"><li style="font-size:35px;color:black"></li></a>
-					<a href="#div4"><li style="font-size:35px;color:black"></li></a>
+					<a id="li1" href="#div1"><li style="font-size:35px; color:black" active></li></a>
+					<a id="li2" href="#div2"><li style="font-size:35px;color:black"></li></a>
+					<a id="li3" href="#div3"><li style="font-size:35px;color:black"></li></a>
+					<a id="li4" href="#div4"><li style="font-size:35px;color:black"></li></a>
 				</ul>
 			</div>
 			<div style="width: 95%; float:center">
@@ -190,40 +104,65 @@
 
 
 	<script>
-		var modal = document.getElementById('cadastro');
-		var modalL = document.getElementById('login');
-		
-		var btn = document.getElementById("btnCadastro");
-		var btnL = document.getElementById("btnLogin");
-		
-		var span = document.getElementsByClassName("close")[0];
-		var spanL = document.getElementsByClassName("close")[0];
-		
-		btn.onclick = function() {
-			modal.style.display = "block";
-		}
 
-		btnL.onclick = function() {
-			modalL.style.display = "block";
-		}
-		
-		span.onclick = function() {
-			modal.style.display = "none";
-			modalL.style.display = "none";
-		}
+			// mudar fundo ao clicar nos li
+				primeiroLi = document.getElementById('li1')
+				img_fundo = document.getElementById('imagem_fundo')
+				fundo1 = document.getElementById('fundo1')
+				
 
-		spanL.onclick = function() {
-			modal.style.display = "none";
-			modalL.style.display = "none";
-		}
+				document.getElementById('voltar_home').onclick = function(){
+					img_fundo.style.display = "block"
+					fundo1.style.display = "none"
+				}
+
+				primeiroLi.onclick = function(){
+					img_fundo.style.display = "none"
+					fundo1.style.display = "block"
+				}
 		
-		window.onclick = function(event) {
-			if (event.target == modal || event.target == modalL) {
-				modal.style.display = "none";
-				modalL.style.display = "none";
+	
+			// escondendo as divs do modal
+			window.onclick = function(event) {
+				if (event.target == modal || event.target == modalL) {
+					modal.style.display = "none";
+					modalL.style.display = "none";
+				}
 			}
-		}
-	</script>
-  
+	
+			// pegando as divs 
+			var modal = document.getElementById('cadastro');
+			var modalL = document.getElementById('login');
+			
+			// abrindo modal pelo botao
+				var btn = document.getElementById("btnCadastro");
+				var btnL = document.getElementById("btnLogin");
+	
+				btn.onclick = function() {
+					modal.style.display = "block";
+				}
+	
+				btnL.onclick = function() {
+					modalL.style.display = "block";
+				}
+			//
+	
+			// fechando modal
+				var span = document.getElementsByClassName("close")[0];
+				var spanL = document.getElementsByClassName("closeL")[0];
+			//
+	
+			// mudando fundo da home
+				var spanL = document.getElementsByClassName("closeL")[0];
+				var spanL = document.getElementsByClassName("closeL")[0];
+	
+				span.onclick = function() {
+					modal.style.display = "none";
+				}
+				spanL.onclick = function() {
+					modalL.style.display = "none";
+				}
+			//
+		</script>
  	</body>	
 </html>
