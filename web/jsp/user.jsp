@@ -1,3 +1,10 @@
+<%-- 
+    Document   : user
+    Created on : 23/09/2018, 19:04:50
+    Author     : gabri
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
 	<head>
@@ -11,18 +18,22 @@
 
 		<div class="row">
 			<div class="col-md-6 mt-1">
-				<button class="btn btn-danger">Meus Pedidos</button>
+                            <a href="/" class="btn" style="color:#000000" ><i class="fas fa-home"></i></a>
+                            <button class="btn btn-danger">Meus Pedidos</button>
 			</div>	
 
 			<div class="col-md-6 text-right">
 				<a href="#" class="mr-3 btn" style="text-decoration: none;color: black"><i class="far fa-user" style="font-size:30px;color:black"></i> Carlos Augusto Liks</a>
 			</div>
 		</div>
+            
+                <h1> ${nome} </h1>
+                
 
 		<div class="row pb-3">
 			<div class="col-md-5" style="border:solid; border-width: 1px">
 				<center>
-					<img src="./koyata.png" width="90%" h1eight="90%" class="mt-4">
+					<img src="../static/images/koyata.png" width="90%" h1eight="90%" class="mt-4">
 				</center>
 				<div class="row">
 					<div class="col-md-3">

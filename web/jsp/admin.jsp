@@ -1,3 +1,10 @@
+<%-- 
+    Document   : admin
+    Created on : 23/09/2018, 19:05:01
+    Author     : gabri
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
   <head>
