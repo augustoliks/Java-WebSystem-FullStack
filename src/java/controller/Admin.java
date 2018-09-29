@@ -21,15 +21,15 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "Admin", urlPatterns = {"/admin"})
 public class Admin extends HttpServlet {
 
-    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         ServletContext sc = request.getServletContext();
-        try{
+        try {
             sc.getRequestDispatcher("/jsp/admin.jsp").forward(request, response);
-        }catch(Exception e){System.out.println(e);}
-        
-        
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
     }
 
 }
