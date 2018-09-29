@@ -23,12 +23,9 @@
 			</div>	
 
 			<div class="col-md-6 text-right">
-				<a href="#" class="mr-3 btn" style="text-decoration: none;color: black"><i class="far fa-user" style="font-size:30px;color:black"></i> Carlos Augusto Liks</a>
+				<a href="#" class="mr-3 btn" style="text-decoration: none;color: black"><i class="far fa-user" style="font-size:30px;color:black"></i> ${nome}</a>
 			</div>
 		</div>
-            
-                <h1> ${nome} </h1>
-                
 
 		<div class="row pb-3">
 			<div class="col-md-5" style="border:solid; border-width: 1px">

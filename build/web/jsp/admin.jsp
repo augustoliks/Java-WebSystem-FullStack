@@ -16,14 +16,14 @@
 
   <style>
   
-  .nav-tabs .nav-link {
+    .nav-tabs .nav-link {
         border: 1px solid transparent;
         /* border-top-left-radius: .25rem; */
         border-top-right-radius: .25rem;
     }
     .nav-tabs li a {
         color: white;
-        background-color: #007bff;
+        background-color: #ff0000;
         font-size: 0.875rem;
         font-family: open_sans_regular;
     }
@@ -39,15 +39,12 @@
         margin-bottom: 15px;
         border-top-left-radius: 0;
     }
-
-    #btnDel:hover {
-        background-color: red;
+    button:hover {
+        background-color:#d9d9d9;
         color: white;
     }
-
-    button:hover {
-        background-color:#007bff;
-        color: white;
+    .voltaHome:hover {
+        color: white !important;
     }
   
   </style>
@@ -56,10 +53,10 @@
         <div class="col-md-10 offset-md-1 pt-4">
             <ul class="nav nav-tabs">
                 <li class="active nav-item">
-                    <a class="nav-link active" href="#gerar_contrato" data-toggle="tab">Gerar Contrato</a>
+                    <a class="nav-link active " href="#gerar_contrato" data-toggle="tab">Gerar Contrato</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#reservas" data-toggle="tab">Reservas</a>
+                    <a class="nav-link btn-red" href="#reservas" data-toggle="tab">Reservas</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#receber_veiculos" data-toggle="tab">Receber Veículos</a>
@@ -146,8 +143,11 @@
 
                         </div>
 
-                        <button class="btn btn-muted" id="btnPr1ocurar">Procurar</button>
-                        <button class="btn btn-muted" id="btn1Gerar">Gerar</button>
+                        <button class="btn btn-muted" id="">Procurar</button>
+                        <button class="btn btn-muted" id="">Gerar</button>
+                        
+                        <a href="/" class="btn voltaHome" style="float:right;color:black;background-color: #d9d9d9">Voltar pra Pagina Principal</a>
+
                     </form>
                 </div>
                 <div class="tab-pane" id="reservas">

@@ -38,6 +38,12 @@ li:hover, li.active{
     color: #d9d9d9;
 }
 
+.inputStyle {
+    margin-top:5px;
+    border-radius:.25rem;
+    padding:5px 5px;
+}
+
 
 .btn {
     border: 1px solid transparent;

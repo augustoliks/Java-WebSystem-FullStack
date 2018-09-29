@@ -38,7 +38,18 @@ public class Login extends HttpServlet {
 //            Usuario user = new Usuario(nome, rg, cpf, endereco, email, senha);
 
             request.setAttribute("nome", nome);
-            sc.getRequestDispatcher("/jsp/user.jsp").forward(request, response);
+            
+            if(nome.equals("carlos") && senha.equals("carlos")){
+                sc.getRequestDispatcher("/jsp/user.jsp").forward(request, response);
+            }
+            else if(nome.equals("admin") && senha.equals("admin")) {
+                sc.getRequestDispatcher("/jsp/admin.jsp").forward(request, response);
+            }
+            else{
+                request.setAttribute("erroLogin", true);
+                sc.getRequestDispatcher("/jsp/user.jsp").forward(request, response);
+
+            }
             
         }catch(Exception e){System.out.print(e);}
     }
