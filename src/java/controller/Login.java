@@ -5,7 +5,6 @@
  */
 package controller;
 
-import model.Cliente;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletContext;
