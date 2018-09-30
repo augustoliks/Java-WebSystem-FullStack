@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package api.dao;
+package api.servico;
 
-import api.model.Reserva;
+import api.model.Pessoa;
 
 /**
  *
  * @author liks
  */
-public interface ReservaDAOCaracteristicas {
-    public boolean insert(Reserva reserva);
-    public Reserva findById(Long id);
+public interface LoginCaracteristicas {
+
+    public Pessoa findByNomeUsuario(String nomeUsuario);
 }

@@ -10,7 +10,7 @@ package api.model;
  *
  * @author liks
  */
-public class Operador {
+public class Operador extends Pessoa{
     private long idOperador;
 
     public long getIdOperador() {

@@ -6,28 +6,27 @@
 package core.servico;
 import api.model.Cliente;
 import api.servico.*;
+import core.dao.ClienteDAO;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.websocket.ClientEndpointConfig;
 /**
  *
  * @author liks
  */
 public class CadastroClienteServico implements ClienteServicoCaracacteristicas{
-
-
     
     @Override
     public boolean insert(Cliente cliente) {
         
-        boolean statusCadastro =true;
-        
+        ClienteDAO cadastroDAO = null;
         try {
-            //dao pra insert
-        } catch (Exception e) {
-            //pegou a excessao
+            cadastroDAO = new ClienteDAO();
+        } catch (IOException ex) {
+            Logger.getLogger(CadastroClienteServico.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        return statusCadastro;
+        return cadastroDAO.insert(cliente);
         
     }
     

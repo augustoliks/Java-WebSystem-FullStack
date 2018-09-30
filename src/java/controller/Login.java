@@ -6,8 +6,11 @@
  */
 package controller;
 
+import api.model.Cliente;
+import api.model.Operador;
+import api.model.Pessoa;
+import core.servico.LoginServico;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,36 +25,37 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "Login", urlPatterns = {"/login"})
 public class Login extends HttpServlet {
 
-   
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
-        try{
-            
-            ServletContext sc = request.getServletContext();
-            String nome = request.getParameter("nome");
-            String rg = request.getParameter("rg");
-            String cpf = request.getParameter("cpf");
-            String endereco = request.getParameter("endereco");
-            String email = request.getParameter("email");
-            String senha = request.getParameter("senha");
-            
-//            Usuario user = new Usuario(nome, rg, cpf, endereco, email, senha);
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-            request.setAttribute("nome", nome);
-            
-            if(nome.equals("carlos") && senha.equals("carlos")){
+        try {
+            request.setCharacterEncoding("UTF-8");
+        } catch (Exception e) {
+            System.out.println(">>>\tErro no encode de caracter (Login.class)");
+        }
+
+        ServletContext sc = request.getServletContext();
+
+        String nomeUsuario = request.getParameter("usuario");
+        String senhaUsuario = request.getParameter("senha");
+
+        LoginServico loginServico = new LoginServico();
+
+        Pessoa pessoaBD = loginServico.findByNomeUsuario(nomeUsuario);
+
+        if (pessoaBD != null && pessoaBD.getSenha().equals(senhaUsuario)) {
+
+            if (pessoaBD instanceof Cliente) {
                 sc.getRequestDispatcher("/jsp/user.jsp").forward(request, response);
-            }
-            else if(nome.equals("admin") && senha.equals("admin")) {
+            } else if (pessoaBD instanceof Operador) {
                 sc.getRequestDispatcher("/jsp/admin.jsp").forward(request, response);
             }
-            else{
-                request.setAttribute("erroLogin", true);
-                sc.getRequestDispatcher("/jsp/user.jsp").forward(request, response);
-
-            }
             
-        }catch(Exception e){System.out.print(e);}
+        } else {
+            request.setAttribute("falhaAutenticacao", true);
+            sc.getRequestDispatcher("/jsp/index.jsp").forward(request, response);
+        }
+
     }
 
 }

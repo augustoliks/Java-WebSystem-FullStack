@@ -5,13 +5,10 @@
  */
 package api.dao;
 
-import api.model.Reserva;
-
 /**
  *
  * @author liks
  */
-public interface ReservaDAOCaracteristicas {
-    public boolean insert(Reserva reserva);
-    public Reserva findById(Long id);
+public interface CategoriaDAOCaracteristicas {
+    
 }

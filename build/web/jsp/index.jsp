@@ -130,7 +130,7 @@
                 <form action="/login" method="POST">
                     <div>
                         <label>Login</label>
-                        <input type="text" name="nome">
+                        <input type="text" name="usuario">
                     </div>
                     <div>
                         <label>Senha</label>
