@@ -24,7 +24,7 @@ public class LeitorPropiedadesBancoDados {
 
     public LeitorPropiedadesBancoDados() throws FileNotFoundException, IOException {
         this.prop = new Properties();
-//        this.input = new FileInputStream("src/java/resources/bancoDados.properties");
+//        this.input = new FileInput Stream("src/java/resources/bancoDados.properties");
 //        this.prop.load(input);
     }
 
