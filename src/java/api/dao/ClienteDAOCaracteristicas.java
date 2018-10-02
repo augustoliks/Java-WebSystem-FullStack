@@ -12,7 +12,7 @@ import api.model.Cliente;
  * @author liks
  */
 public interface ClienteDAOCaracteristicas {
-    public boolean insert(Cliente cliente);
+    public void insert(Cliente cliente);
     public Cliente findById(Long id);
     public Cliente findByNomeCliente(String nomeCliente);
     public Cliente findByName(String name);

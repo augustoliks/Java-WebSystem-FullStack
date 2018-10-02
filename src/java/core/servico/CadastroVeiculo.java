@@ -5,12 +5,28 @@
  */
 package core.servico;
 
+import api.model.Veiculo;
+import api.servico.CadastroVeiculoCaracteristicas;
+import core.dao.VeiculoDAO;
+
 /**
  *
  * @author liks
  */
-public class CadastroVeiculo {
-    
-    
-    
+public class CadastroVeiculo implements CadastroVeiculoCaracteristicas {
+
+    @Override
+    public boolean insert(Veiculo veiculo) {
+
+        VeiculoDAO veiculoDAO = null;
+
+        boolean status;
+
+        veiculoDAO = new VeiculoDAO();
+
+        veiculoDAO.insert(veiculo);
+     
+        return false;
+
+    }
 }

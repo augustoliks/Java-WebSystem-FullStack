@@ -59,3 +59,4 @@ public class VeiculoDAO extends DAO implements VeiculoDAOCaracteristicas {
 
 }
 
+

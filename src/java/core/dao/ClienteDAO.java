@@ -28,7 +28,7 @@ public class ClienteDAO extends DAO implements ClienteDAOCaracteristicas {
     }
 
     @Override
-    public boolean insert(Cliente cliente) {
+    public void insert(Cliente cliente) {
         boolean status;
 
         PreparedStatement comandoSQLp;
@@ -52,14 +52,10 @@ public class ClienteDAO extends DAO implements ClienteDAOCaracteristicas {
             comandoSQLp.setString(6, cliente.getSenha());
             comandoSQLp.executeQuery();
             
-            status = true;
-
         } catch (Exception e) {
             System.out.println("Erro no insert CadastroCliente");
-            status = false;
         }
 
-        return status;
     }
 
     @Override
