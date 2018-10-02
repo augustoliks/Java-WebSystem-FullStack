@@ -17,15 +17,15 @@ import java.util.Properties;
  */
 public class LeitorPropiedadesBancoDados {
 
-    private static final String DIRETORIO = "src/java/resources/bancoDados.properties";
+    private static final String DIRETORIO = "./bancoDados.properties";
 
     public Properties prop;
     public InputStream input;
 
     public LeitorPropiedadesBancoDados() throws FileNotFoundException, IOException {
-        this.prop = new Properties();
-//        this.input = new FileInput Stream("src/java/resources/bancoDados.properties");
-//        this.prop.load(input);
+       // this.prop = new Properties();
+       // this.input = new FileInputStream(DIRETORIO);
+       // this.prop.load(input);
     }
 
     public String getUsuario() throws FileNotFoundException, IOException {

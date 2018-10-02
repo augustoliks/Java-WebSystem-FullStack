@@ -51,6 +51,7 @@ public class ClienteDAO extends DAO implements ClienteDAOCaracteristicas {
             comandoSQLp.setString(5, cliente.getCpf());
             comandoSQLp.setString(6, cliente.getSenha());
             comandoSQLp.executeQuery();
+            
             status = true;
 
         } catch (Exception e) {

@@ -5,6 +5,7 @@
  */
 package api.dao;
 
+import api.model.Cliente;
 import api.model.Reserva;
 
 /**
@@ -13,5 +14,4 @@ import api.model.Reserva;
  */
 public interface ReservaDAOCaracteristicas {
     public boolean insert(Reserva reserva);
-    public Reserva findById(Long id);
 }

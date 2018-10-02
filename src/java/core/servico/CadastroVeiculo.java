@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package api.dao;
-
-import api.model.Veiculo;
+package core.servico;
 
 /**
  *
  * @author liks
  */
-public interface VeiculoDAOCaracteristicas {    
-    public boolean insert(Veiculo veiculo);
+public class CadastroVeiculo {
+    
+    
+    
 }

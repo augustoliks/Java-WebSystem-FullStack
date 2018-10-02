@@ -20,8 +20,16 @@ public class Veiculo {
     private int kilometragem;
     private String estadoConservervacao;
     private String cor;
-    private String disponibilidade;
+    private String categoria;
 
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+    
     public long getIdVeiculo() {
         return idVeiculo;
     }
@@ -84,14 +92,6 @@ public class Veiculo {
 
     public void setCor(String cor) {
         this.cor = cor;
-    }
-
-    public String getDisponibilidade() {
-        return disponibilidade;
-    }
-
-    public void setDisponibilidade(String disponibilidade) {
-        this.disponibilidade = disponibilidade;
     }
 
 }

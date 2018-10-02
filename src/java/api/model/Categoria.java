@@ -5,38 +5,38 @@
  */
 package api.model;
 
-
 /**
  *
  * @author liks
  */
 public class Categoria {
-    private long id;
-    private long valor;
-    private long nome; 
-    
-    public long getId() {
-        return id;
+
+    private long idCategoria;
+    private String nome;
+    private String valor;
+
+    public long getIdCategoria() {
+        return idCategoria;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setIdCategoria(long idCategoria) {
+        this.idCategoria = idCategoria;
     }
 
-    public long getValor() {
-        return valor;
-    }
-
-    public void setValor(long valor) {
-        this.valor = valor;
-    }
-
-    public long getNome() {
+    public String getNome() {
         return nome;
     }
 
-    public void setNome(long nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
+    public String getValor() {
+        return valor;
+    }
+
+    public void setValor(String valor) {
+        this.valor = valor;
+    }
+    
 }
