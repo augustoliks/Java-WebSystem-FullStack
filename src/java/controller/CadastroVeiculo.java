@@ -31,6 +31,7 @@ public class CadastroVeiculo extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        System.out.println("carlosdgfdngafjsdngkafnjgakfjgafknjgkagn");
         ServletContext sc = request.getServletContext();
 
         int ano = Integer.valueOf(request.getParameter("ano"));

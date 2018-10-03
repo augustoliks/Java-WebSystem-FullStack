@@ -31,10 +31,8 @@ public class ClienteDAO extends DAO implements ClienteDAOCaracteristicas {
     public boolean insert(Cliente cliente) {
         boolean status;
 
-        PreparedStatement comandoSQLp;
-
         try {
-            comandoSQLp = this.conexao.prepareStatement(""
+            this.preparedStatement = this.conexao.prepareStatement(""
                     + "INSERT INTO CLIENTE ("
                     + "pk_cliente, "
                     + "nome, "
@@ -44,13 +42,13 @@ public class ClienteDAO extends DAO implements ClienteDAOCaracteristicas {
                     + "senha) "
                     + "VALUES (?, ?, ?, ?, ?, ?);");
 
-            comandoSQLp.setString(1, cliente.getRg());
-            comandoSQLp.setString(2, cliente.getNome());
-            comandoSQLp.setString(3, cliente.getEndereco());
-            comandoSQLp.setString(4, cliente.getEmail());
-            comandoSQLp.setString(5, cliente.getCpf());
-            comandoSQLp.setString(6, cliente.getSenha());
-            comandoSQLp.executeQuery();
+            this.preparedStatement.setString(1, cliente.getRg());
+            this.preparedStatement.setString(2, cliente.getNome());
+            this.preparedStatement.setString(3, cliente.getEndereco());
+            this.preparedStatement.setString(4, cliente.getEmail());
+            this.preparedStatement.setString(5, cliente.getCpf());
+            this.preparedStatement.setString(6, cliente.getSenha());
+            this.preparedStatement.executeQuery();
 
             status = true;
 
@@ -94,7 +92,7 @@ public class ClienteDAO extends DAO implements ClienteDAOCaracteristicas {
             }
 
             this.fecharConexao();
-            
+
         } catch (Exception e) {
             System.out.print("\nErro de conexão...Find by name Clietne");
             this.fecharConexao();

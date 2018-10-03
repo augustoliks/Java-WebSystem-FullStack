@@ -20,12 +20,10 @@ public class VeiculoDAO extends DAO implements VeiculoDAOCaracteristicas {
     public boolean insert(Veiculo veiculo) {
 
         boolean status;
-
-        PreparedStatement comandoSQLp;
-
+        
         try {
 
-            comandoSQLp = conexao.prepareStatement(""
+            this.preparedStatement = this.conexao.prepareStatement(""
                     + "INSERT INTO VEICULO ("
                     + " modelo, "
                     + " ano, "
@@ -36,17 +34,17 @@ public class VeiculoDAO extends DAO implements VeiculoDAOCaracteristicas {
                     + " cor) " //9
                     + "VALUES (?, ?, ?, ?, ?, ?, ?);");
 
-            comandoSQLp.setString(1, veiculo.getModelo());
-            comandoSQLp.setInt(2, veiculo.getAno());
-            comandoSQLp.setString(3, veiculo.getFabricante());
-            comandoSQLp.setString(4, veiculo.getCombustivel());
-            comandoSQLp.setInt(5, veiculo.getKilometragem());
-            comandoSQLp.setString(6, veiculo.getEstadoConservervacao());
-            comandoSQLp.setString(7, veiculo.getCor());
+            this.preparedStatement.setString(1, veiculo.getModelo());
+            this.preparedStatement.setInt(2, veiculo.getAno());
+            this.preparedStatement.setString(3, veiculo.getFabricante());
+            this.preparedStatement.setString(4, veiculo.getCombustivel());
+            this.preparedStatement.setInt(5, veiculo.getKilometragem());
+            this.preparedStatement.setString(6, veiculo.getEstadoConservervacao());
+            this.preparedStatement.setString(7, veiculo.getCor());
 
-            comandoSQLp.executeQuery();
+            this.preparedStatement.executeQuery();
 
-            comandoSQLp.executeQuery();
+            this.preparedStatement.executeQuery();
             status = true;
 
         } catch (SQLException e) {
