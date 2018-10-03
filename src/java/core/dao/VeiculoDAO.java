@@ -8,6 +8,7 @@ package core.dao;
 import api.dao.VeiculoDAOCaracteristicas;
 import api.model.Veiculo;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 /**
  *
@@ -48,7 +49,7 @@ public class VeiculoDAO extends DAO implements VeiculoDAOCaracteristicas {
             comandoSQLp.executeQuery();
             status = true;
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Erro no insert CadastroVeiculo");
             status = false;
         }

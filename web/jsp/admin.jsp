@@ -419,7 +419,7 @@
                             <label for="" class="col-sm-2 mt-2">Quilometragem:</label>
 
                             <div class="col-sm-7 mt-2">
-                                <input type="text" class="form-control" id="" placeholder="" name="quilometragem">
+                                <input type="text" class="form-control" id="" placeholder="" name="kilometragem">
                             </div>
                             
                             <label for="" class="col-sm-3"></label>
@@ -433,7 +433,7 @@
                             <label for="" class="col-sm-3 mt-2">Tanque de Combustivel:</label>
 
                             <div class="col-sm-6 mt-2">
-                                <input type="text" class="form-control" id="" placeholder="" name="tanque">
+                                <input type="text" class="form-control" id="" placeholder="" name="combustivel">
                             </div>
                             
                             <div class="col-sm-12">

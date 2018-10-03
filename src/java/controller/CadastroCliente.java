@@ -57,6 +57,4 @@ public class CadastroCliente extends HttpServlet {
         }
         
     }
-
-
 }
