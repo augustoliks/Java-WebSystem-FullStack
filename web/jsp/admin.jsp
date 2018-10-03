@@ -55,11 +55,17 @@
                 <li class="active nav-item">
                     <a class="nav-link active " href="#gerar_contrato" data-toggle="tab">Gerar Contrato</a>
                 </li>
+                
                 <li class="nav-item">
                     <a class="nav-link btn-red" href="#reservas" data-toggle="tab">Reservas</a>
                 </li>
+                
                 <li class="nav-item">
                     <a class="nav-link" href="#receber_veiculos" data-toggle="tab">Receber Veículos</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="#inserir_veiculo" data-toggle="tab">Inserir Veiculos</a>
                 </li>
             </ul>
             
@@ -68,14 +74,15 @@
                     <!-- GERAR CONTRATO -->
                     <form>
                         <div class="form-group row">
-
-                            <label for="" class="col-sm-4 col-form-label">Código de Reserva</label>
                             
-                            <div class="col-sm-8 mb-2">
+                            <label class="col-sm-5"> Codigo da Reserva:</label>
+                            
+                            <div class="col-sm-7">
                                 <input type="text" class="form-control" id="" placeholder="">
                             </div>
 
-                            <label for="" class="col-sm-3">Dados do Usuário:</label>
+                            
+<!--                            <label for="" class="col-sm-3">Dados do Cliente</label>
                             <label for="" class="col-sm-2">Nome:</label>
                             
                             <div class="col-sm-7">
@@ -110,32 +117,111 @@
                             <div class="col-sm-7 mt-2">
                                 <input type="text" class="form-control" id="" placeholder="">
                             </div>
+                            
+                            <div class="col-sm-12">
+                                <hr>
+                            </div>-->
+                            
+                            <!--DADOS DO CARRO-->
+<!--                            <label for="" class="col-sm-3">Dados do Carro</label>
+                            <label for="" class="col-sm-2">Categoria:</label>
 
-                            <label for="" class="col-sm-4">Horário de Inicio:</label>
+                            <div class="col-sm-7">
+                                <select class="form-control">
+                                    <option>Popular</option>
+                                    <option>Esportivo</option>
+                                    <option>Luxo</option>
+                                </select>
+                            </div>
+
+                            <label for="" class="col-sm-3"> </label>
+                            <label for="" class="col-sm-2 mt-2">Ano:</label>
+
+                            <div class="col-sm-7 mt-2">
+                                <input type="text" class="form-control" id="" placeholder="">
+                            </div>
+
+                            <label for="" class="col-sm-3"> </label>
+                            <label for="" class="col-sm-2 mt-2">Placa:</label>
+
+                            <div class="col-sm-7 mt-2">
+                                <input type="text" class="form-control" id="" placeholder="">
+                            </div>
+
+                            <label for="" class="col-sm-3"> </label>
+                            <label for="" class="col-sm-2 mt-2">Modelo:</label>
+
+                            <div class="col-sm-7 mt-2">
+                                <input type="text" class="form-control" id="" placeholder="">
+                            </div>
+
+                            <label for="" class="col-sm-3"> </label>
+                            <label for="" class="col-sm-2 mt-2">Fabricante:</label>
+
+                            <div class="col-sm-7 mt-2">
+                                <input type="text" class="form-control" id="" placeholder="">
+                            </div>
+
+                            <label for="" class="col-sm-3"> </label>
+                            <label for="" class="col-sm-2 mt-2">Cor:</label>
+
+                            <div class="col-sm-7 mt-2">
+                                <input type="text" class="form-control" id="" placeholder="">
+                            </div>
+                            
+                            <label for="" class="col-sm-3"> </label>
+                            <label for="" class="col-sm-2 mt-2">Quilometragem:</label>
+
+                            <div class="col-sm-7 mt-2">
+                                <input type="text" class="form-control" id="" placeholder="">
+                            </div>
+                            
+                            <label for="" class="col-sm-3"></label>
+                            <label for="" class="col-sm-3 mt-2">Estado de Conservação:</label>
+
+                            <div class="col-sm-6 mt-2">
+                                <input type="text" class="form-control" id="" placeholder="">
+                            </div>
+                            
+                            
+                            
+                            <label for="" class="col-sm-3"> </label>
+                            <label for="" class="col-sm-3 mt-2">Tanque de Combustivel:</label>
+
+                            <div class="col-sm-6 mt-2">
+                                <input type="text" class="form-control" id="" placeholder="">
+                            </div>-->
+                            
+                            
+                            <div class="col-sm-12">
+                                <hr>
+                            </div>
+                            
+                            <label for="" class="col-sm-4 mt-2">Horário de Retirada:</label>
                             
                             <div class="col-sm-8 mt-2">
                                 <input type="text" class="form-control" id="" placeholder="">
                             </div>
 
-                            <label for="" class="col-sm-4">Término Previsto:</label>
+                            <label for="" class="col-sm-4 mt-2">Horário de Devolução:</label>
                             
                             <div class="col-sm-8 mt-2">
                                 <input type="text" class="form-control" id="" placeholder="">
                             </div>
 
-                            <label for="" class="col-sm-4">Valor Total Previsto:</label>
+                            <label for="" class="col-sm-4 mt-2">Valor Total da Reserva:</label>
                             
                             <div class="col-sm-8 mt-2">
                                 <input type="text" class="form-control" id="" placeholder="">
                             </div>
 
-                            <label for="" class="col-sm-4">Valor Total Previsto:</label>
+                            <label for="" class="col-sm-4 mt-2">Valor Pago Antecipadamente:</label>
                             
                             <div class="col-sm-8 mt-2">
                                 <input type="text" class="form-control" id="" placeholder="">
                             </div>
 
-                            <label for="" class="col-sm-4">Carro Específico:</label>
+                            <label for="" class="col-sm-4 mt-2">Valor Pago na Devolução:</label>
                             
                             <div class="col-sm-8 mt-2">
                                 <input type="text" class="form-control" id="" placeholder="">
@@ -154,15 +240,15 @@
                     <!-- RESERVA -->
                     <form>
                         <div class="form-group row">
-                            
+<!--                            
                             <label for="" class="col-sm-4 col-form-label">Código de Reserva</label>
                             
                             <div class="col-sm-8 mb-2">
                                 <input type="text" class="form-control" id="" placeholder="">
-                            </div>
+                            </div>-->
 
                             <label for="" class="col-sm-3">Dados do Usuário:</label>
-                            <label for="" class="col-sm-2">Nome:</label>
+                            <label for="" class="col-sm-2 mt-2">Nome:</label>
                             
                             <div class="col-sm-7">
                                 <input type="text" class="form-control" id="" placeholder="">
@@ -170,61 +256,63 @@
 
 
                             <label for="" class="col-sm-3"> </label>
-                            <label for="" class="col-sm-2">Sobrenome:</label>
+                            <label for="" class="col-sm-2 mt-2">Sobrenome:</label>
                             
                             <div class="col-sm-7 mt-2">
                                 <input type="text" class="form-control" id="" placeholder="">
                             </div>
 
                             <label for="" class="col-sm-3"> </label>
-                            <label for="" class="col-sm-2">CPF:</label>
+                            <label for="" class="col-sm-2 mt-2">CPF:</label>
                             
                             <div class="col-sm-7 mt-2">
                                 <input type="text" class="form-control" id="" placeholder="">
                             </div>
 
                             <label for="" class="col-sm-3"> </label>
-                            <label for="" class="col-sm-2">Endereço:</label>
+                            <label for="" class="col-sm-2 mt-2">Endereço:</label>
                             
                             <div class="col-sm-7 mt-2">
                                 <input type="text" class="form-control" id="" placeholder="">
                             </div>
 
                             <label for="" class="col-sm-3"> </label>
-                            <label for="" class="col-sm-2">Código de Registro:</label>
+                            <label for="" class="col-sm-2 mt-2">Código de Registro:</label>
                             
                             <div class="col-sm-7 mt-2">
                                 <input type="text" class="form-control" id="" placeholder="">
                             </div>
-
-                            <label for="" class="col-sm-4">Horário de Inicio:</label>
+                                
+                            <div class="col-sm-12">
+                                <hr>
+                            </div>
+                            
+                            <label for="" class="col-sm-4 mt-2">Horário de Inicio:</label>
                             
                             <div class="col-sm-8 mt-2">
                                 <input type="text" class="form-control" id="" placeholder="">
                             </div>
 
-                            <label for="" class="col-sm-4">Término Previsto:</label>
+                            <label for="" class="col-sm-4 mt-2">Término Previsto:</label>
                             
                             <div class="col-sm-8 mt-2">
                                 <input type="text" class="form-control" id="" placeholder="">
                             </div>
 
-                            <label for="" class="col-sm-4">Valor Total Previsto:</label>
+                            <label for="" class="col-sm-4 mt-2">Valor Total Previsto:</label>
                             
                             <div class="col-sm-8 mt-2">
                                 <input type="text" class="form-control" id="" placeholder="">
                             </div>
 
-                            <label for="" class="col-sm-4">Valor Total Previsto:</label>
+                            <label for="" class="col-sm-4 mt-2">Categoria do Carro</label>
                             
                             <div class="col-sm-8 mt-2">
-                                <input type="text" class="form-control" id="" placeholder="">
-                            </div>
-
-                            <label for="" class="col-sm-4">Carro Específico:</label>
-                            
-                            <div class="col-sm-8 mt-2">
-                                <input type="text" class="form-control" id="" placeholder="">
+                                <select class="form-control">
+                                    <option>Popular</option>
+                                    <option>Luxo</option>
+                                    <option>Esportivo</option>
+                                </select>
                             </div>
 
                         </div>
@@ -239,67 +327,31 @@
                     <!-- RECEBER VEICULO -->
                     <form>
                         <div class="form-group row">
-                            <label for="" class="col-sm-4 col-form-label">Código de Reserva</label>
+                            <label for="" class="col-sm-4 col-form-label">Código de Reserva:</label>
                             
                             <div class="col-sm-8 mb-2">
                                 <input type="text" class="form-control" id="" placeholder="">
                             </div>
 
-                            <label for="" class="col-sm-3">Dados do Usuário:</label>
-                            <label for="" class="col-sm-2">Nome:</label>
-                            
-                            <div class="col-sm-7">
-                                <input type="text" class="form-control" id="" placeholder="">
-                            </div>
-
-
-                            <label for="" class="col-sm-3"> </label>
-                            <label for="" class="col-sm-2">Sobrenome:</label>
-                            
-                            <div class="col-sm-7 mt-2">
-                                <input type="text" class="form-control" id="" placeholder="">
-                            </div>
-
-                            <label for="" class="col-sm-3"> </label>
-                            <label for="" class="col-sm-2">CPF:</label>
-                            
-                            <div class="col-sm-7 mt-2">
-                                <input type="text" class="form-control" id="" placeholder="">
-                            </div>
-
-                            <label for="" class="col-sm-3"> </label>
-                            <label for="" class="col-sm-2">Endereço:</label>
-                            
-                            <div class="col-sm-7 mt-2">
-                                <input type="text" class="form-control" id="" placeholder="">
-                            </div>
-
-                            <label for="" class="col-sm-3"> </label>
-                            <label for="" class="col-sm-2">Código de Registro:</label>
-                            
-                            <div class="col-sm-7 mt-2">
-                                <input type="text" class="form-control" id="" placeholder="">
-                            </div>
-
-                            <label for="" class="col-sm-4">Data de devolução:</label>
+                            <label for="" class="col-sm-4 mt-2">Data de devolução:</label>
                             
                             <div class="col-sm-8 mt-2">
                                 <input type="text" class="form-control" id="" placeholder="">
                             </div>
 
-                            <label for="" class="col-sm-4">Conservação:</label>
+                            <label for="" class="col-sm-4 mt-2">Conservação:</label>
                             
                             <div class="col-sm-8 mt-2">
                                 <input type="text" class="form-control" id="" placeholder="">
                             </div>
 
-                            <label for="" class="col-sm-4">Kilometragem:</label>
+                            <label for="" class="col-sm-4 mt-2">Kilometragem:</label>
                             
                             <div class="col-sm-8 mt-2">
                                 <input type="text" class="form-control" id="" placeholder="">
                             </div>
 
-                            <label for="" class="col-sm-4">Acréscimo $$:</label>
+                            <label for="" class="col-sm-4 mt-2">Acréscimo $$:</label>
                             
                             <div class="col-sm-8 mt-2">
                                 <input type="text" class="form-control" id="" placeholder="">
@@ -309,6 +361,85 @@
 
                         <button class="btn btn-muted" >Procurar</button>
                         <button class="btn btn-muted" >Gerar</button>
+                    </form>
+                </div>
+                <div class="tab-pane" id="inserir_veiculo">
+                    <form action="" method="">
+                        
+                        <div class="form-group row">
+                            
+                            <label for="" class="col-sm-3">Dados do Carro</label>
+                           
+                            <label for="" class="col-sm-2">Categoria:</label>
+
+                            <div class="col-sm-7">
+                                <select class="form-control">
+                                    <option>Popular</option>
+                                    <option>Esportivo</option>
+                                    <option>Luxo</option>
+                                </select>
+                            </div>
+
+                            <label for="" class="col-sm-3"> </label>
+                            <label for="" class="col-sm-2 mt-2">Ano:</label>
+
+                            <div class="col-sm-7 mt-2">
+                                <input type="text" class="form-control" id="" placeholder="" name="">
+                            </div>
+
+                            <label for="" class="col-sm-3"> </label>
+                            <label for="" class="col-sm-2 mt-2">Placa:</label>
+
+                            <div class="col-sm-7 mt-2">
+                                <input type="text" class="form-control" id="" placeholder="">
+                            </div>
+
+                            <label for="" class="col-sm-3"> </label>
+                            <label for="" class="col-sm-2 mt-2">Modelo:</label>
+
+                            <div class="col-sm-7 mt-2">
+                                <input type="text" class="form-control" id="" placeholder="">
+                            </div>
+
+                            <label for="" class="col-sm-3"> </label>
+                            <label for="" class="col-sm-2 mt-2">Fabricante:</label>
+
+                            <div class="col-sm-7 mt-2">
+                                <input type="text" class="form-control" id="" placeholder="">
+                            </div>
+
+                            <label for="" class="col-sm-3"> </label>
+                            <label for="" class="col-sm-2 mt-2">Cor:</label>
+
+                            <div class="col-sm-7 mt-2">
+                                <input type="text" class="form-control" id="" placeholder="">
+                            </div>
+                            
+                            <label for="" class="col-sm-3"> </label>
+                            <label for="" class="col-sm-2 mt-2">Quilometragem:</label>
+
+                            <div class="col-sm-7 mt-2">
+                                <input type="text" class="form-control" id="" placeholder="">
+                            </div>
+                            
+                            <label for="" class="col-sm-3"></label>
+                            <label for="" class="col-sm-3 mt-2">Estado de Conservação:</label>
+
+                            <div class="col-sm-6 mt-2">
+                                <input type="text" class="form-control" id="" placeholder="">
+                            </div>
+                            
+                            <label for="" class="col-sm-3"> </label>
+                            <label for="" class="col-sm-3 mt-2">Tanque de Combustivel:</label>
+
+                            <div class="col-sm-6 mt-2">
+                                <input type="text" class="form-control" id="" placeholder="">
+                            </div>
+                            
+                            <div class="col-sm-12">
+                                <button type="submit" class="btn btn-muted">Inserir</button>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
