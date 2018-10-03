@@ -9,6 +9,7 @@ package controller;
 import api.model.Cliente;
 import api.model.Operador;
 import api.model.Pessoa;
+import api.servico.LoginCaracteristicas;
 import core.servico.LoginServico;
 import java.io.IOException;
 import javax.servlet.ServletContext;
@@ -39,7 +40,7 @@ public class Login extends HttpServlet {
         String nomeUsuario = request.getParameter("usuario");
         String senhaUsuario = request.getParameter("senha");
 
-        LoginServico loginServico = new LoginServico();
+        LoginCaracteristicas loginServico = new LoginServico();
 
         Pessoa pessoaBD = loginServico.findByNomeUsuario(nomeUsuario);
 

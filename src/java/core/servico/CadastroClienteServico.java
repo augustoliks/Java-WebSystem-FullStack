@@ -21,11 +21,13 @@ public class CadastroClienteServico implements ClienteServicoCaracacteristicas{
     public boolean insert(Cliente cliente) {
         
         ClienteDAO cadastroDAO = null;
+     
         try {
             cadastroDAO = new ClienteDAO();
         } catch (IOException ex) {
-            Logger.getLogger(CadastroClienteServico.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Erro de conexao com o ClienteDAO (CadastroClienteServico)");
         }
+        
         return cadastroDAO.insert(cliente);
         
     }

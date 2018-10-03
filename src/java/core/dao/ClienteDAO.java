@@ -28,7 +28,7 @@ public class ClienteDAO extends DAO implements ClienteDAOCaracteristicas {
     }
 
     @Override
-    public void insert(Cliente cliente) {
+    public boolean insert(Cliente cliente) {
         boolean status;
 
         PreparedStatement comandoSQLp;
@@ -51,11 +51,14 @@ public class ClienteDAO extends DAO implements ClienteDAOCaracteristicas {
             comandoSQLp.setString(5, cliente.getCpf());
             comandoSQLp.setString(6, cliente.getSenha());
             comandoSQLp.executeQuery();
-            
+
+            status = true;
+
         } catch (Exception e) {
             System.out.println("Erro no insert CadastroCliente");
+            status = false;
         }
-
+        return status;
     }
 
     @Override
@@ -91,6 +94,7 @@ public class ClienteDAO extends DAO implements ClienteDAOCaracteristicas {
             }
 
             this.fecharConexao();
+            
         } catch (Exception e) {
             System.out.print("\nErro de conexão...Find by name Clietne");
             this.fecharConexao();

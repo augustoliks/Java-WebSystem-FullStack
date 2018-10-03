@@ -6,6 +6,7 @@
 package controller;
 
 import api.model.Cliente;
+import api.servico.ClienteServicoCaracacteristicas;
 import core.servico.CadastroClienteServico;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "CadastroCliente", urlPatterns = {"/CadastroCliente"})
 public class CadastroCliente extends HttpServlet {        
     
-    CadastroClienteServico cadastroClienteServico = new CadastroClienteServico();
+    ClienteServicoCaracacteristicas cadastroClienteServico = new CadastroClienteServico();
     Cliente novoCliente = new Cliente();
     
     @Override

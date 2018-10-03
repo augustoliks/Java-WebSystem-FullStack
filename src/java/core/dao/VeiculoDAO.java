@@ -26,8 +26,8 @@ public class VeiculoDAO extends DAO implements VeiculoDAOCaracteristicas {
 
             comandoSQLp = conexao.prepareStatement(""
                     + "INSERT INTO VEICULO ("
-                    + " modelo, " //2
-                    + " ano, " //4
+                    + " modelo, "
+                    + " ano, "
                     + " fabricante, " //5
                     + " combustivel, " //6
                     + " kilometragem, " //7
@@ -35,13 +35,13 @@ public class VeiculoDAO extends DAO implements VeiculoDAOCaracteristicas {
                     + " cor) " //9
                     + "VALUES (?, ?, ?, ?, ?, ?, ?);");
 
-            comandoSQLp.setString(1, veiculo.getModelo());    //2
-            comandoSQLp.setInt(2, veiculo.getAno());          //3
-            comandoSQLp.setString(3, veiculo.getFabricante());              //4
-            comandoSQLp.setString(4, veiculo.getCombustivel());       //5
-            comandoSQLp.setInt(5, veiculo.getKilometragem());       //6
-            comandoSQLp.setString(6, veiculo.getEstadoConservervacao());               //7
-            comandoSQLp.setString(7, veiculo.getCor());                  //8
+            comandoSQLp.setString(1, veiculo.getModelo());
+            comandoSQLp.setInt(2, veiculo.getAno());
+            comandoSQLp.setString(3, veiculo.getFabricante());
+            comandoSQLp.setString(4, veiculo.getCombustivel());
+            comandoSQLp.setInt(5, veiculo.getKilometragem());
+            comandoSQLp.setString(6, veiculo.getEstadoConservervacao());
+            comandoSQLp.setString(7, veiculo.getCor());
 
             comandoSQLp.executeQuery();
 
@@ -58,5 +58,3 @@ public class VeiculoDAO extends DAO implements VeiculoDAOCaracteristicas {
     }
 
 }
-
-

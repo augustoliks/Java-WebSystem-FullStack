@@ -13,7 +13,7 @@ import core.dao.VeiculoDAO;
  *
  * @author liks
  */
-public class CadastroVeiculo implements CadastroVeiculoCaracteristicas {
+public class CadastroVeiculoServico implements CadastroVeiculoCaracteristicas {
 
     @Override
     public boolean insert(Veiculo veiculo) {

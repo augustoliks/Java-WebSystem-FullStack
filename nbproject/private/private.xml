@@ -2,10 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/home/liks/Dropbox/github/Java-WebSystem-FullStack/src/java/core/servico/CadastroClienteServico.java</file>
-            <file>file:/home/liks/Dropbox/github/Java-WebSystem-FullStack/src/java/core/servico/CadastroVeiculo.java</file>
-            <file>file:/home/liks/Dropbox/github/Java-WebSystem-FullStack/src/java/core/dao/VeiculoDAO.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
