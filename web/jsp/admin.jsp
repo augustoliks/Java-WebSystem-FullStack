@@ -364,7 +364,7 @@
                     </form>
                 </div>
                 <div class="tab-pane" id="inserir_veiculo">
-                    <form action="" method="">
+                    <form action="/CadastroVeiculo" method="POST">
                         
                         <div class="form-group row">
                             
@@ -374,9 +374,9 @@
 
                             <div class="col-sm-7">
                                 <select class="form-control">
-                                    <option>Popular</option>
-                                    <option>Esportivo</option>
-                                    <option>Luxo</option>
+                                    <option value="popular">Popular</option>
+                                    <option value="esportivo">Esportivo</option>
+                                    <option value="luxo">Luxo</option>
                                 </select>
                             </div>
 
@@ -384,56 +384,56 @@
                             <label for="" class="col-sm-2 mt-2">Ano:</label>
 
                             <div class="col-sm-7 mt-2">
-                                <input type="text" class="form-control" id="" placeholder="" name="">
+                                <input type="text" class="form-control" id="" placeholder="" name="ano">
                             </div>
 
                             <label for="" class="col-sm-3"> </label>
                             <label for="" class="col-sm-2 mt-2">Placa:</label>
 
                             <div class="col-sm-7 mt-2">
-                                <input type="text" class="form-control" id="" placeholder="">
+                                <input type="text" class="form-control" id="" placeholder="" name="placa">
                             </div>
 
                             <label for="" class="col-sm-3"> </label>
                             <label for="" class="col-sm-2 mt-2">Modelo:</label>
 
                             <div class="col-sm-7 mt-2">
-                                <input type="text" class="form-control" id="" placeholder="">
+                                <input type="text" class="form-control" id="" placeholder="" name="modelo">
                             </div>
 
                             <label for="" class="col-sm-3"> </label>
                             <label for="" class="col-sm-2 mt-2">Fabricante:</label>
 
                             <div class="col-sm-7 mt-2">
-                                <input type="text" class="form-control" id="" placeholder="">
+                                <input type="text" class="form-control" id="" placeholder="" name="fabricante">
                             </div>
 
                             <label for="" class="col-sm-3"> </label>
                             <label for="" class="col-sm-2 mt-2">Cor:</label>
 
                             <div class="col-sm-7 mt-2">
-                                <input type="text" class="form-control" id="" placeholder="">
+                                <input type="text" class="form-control" id="" placeholder="" name="cor">
                             </div>
                             
                             <label for="" class="col-sm-3"> </label>
                             <label for="" class="col-sm-2 mt-2">Quilometragem:</label>
 
                             <div class="col-sm-7 mt-2">
-                                <input type="text" class="form-control" id="" placeholder="">
+                                <input type="text" class="form-control" id="" placeholder="" name="quilometragem">
                             </div>
                             
                             <label for="" class="col-sm-3"></label>
                             <label for="" class="col-sm-3 mt-2">Estado de Conservação:</label>
 
                             <div class="col-sm-6 mt-2">
-                                <input type="text" class="form-control" id="" placeholder="">
+                                <input type="text" class="form-control" id="" placeholder="" name="conservacao">
                             </div>
                             
                             <label for="" class="col-sm-3"> </label>
                             <label for="" class="col-sm-3 mt-2">Tanque de Combustivel:</label>
 
                             <div class="col-sm-6 mt-2">
-                                <input type="text" class="form-control" id="" placeholder="">
+                                <input type="text" class="form-control" id="" placeholder="" name="tanque">
                             </div>
                             
                             <div class="col-sm-12">
