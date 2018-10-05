@@ -79,9 +79,9 @@
                 <div style="width: 95%;">
                     <button id="btnCadastro" class="btn center mt-5"> CADASTRAR</button>
                     <button id="btnLogin" class="btn center mt-1"> ENTRAR</button>
-
-
                 </div>
+                
+                <span id="erroNoLogin" style="text-align: center; font-size: 10px; color: red"></span>
             </div>
         </div>
 
@@ -143,7 +143,11 @@
 
 
         <script>
-
+            
+            if(<%= request.getAttribute("falhaAutenticacao")%>){
+                document.getElementById("erroNoLogin").innerHTML += "<h1>Usuario ou senha incorretos</h1>";
+            }
+    
             // mudar fundo ao clicar nos li
             primeiroLi = document.getElementById('li1');
             img_fundo = document.getElementById('imagem_fundo');
