@@ -7,6 +7,7 @@ package core.dao;
 
 import api.dao.ClienteDAOCaracteristicas;
 import api.model.Cliente;
+import api.model.ConexaoDB;
 import api.model.Operador;
 import java.io.IOException;
 import java.sql.Connection;
@@ -21,10 +22,12 @@ import java.util.logging.Logger;
  *
  * @author liks
  */
-public class ClienteDAO extends DAO implements ClienteDAOCaracteristicas {
+public class ClienteDAO implements ClienteDAOCaracteristicas {
 
+    private ConexaoDB conexaoDB;
+    
     public ClienteDAO() throws IOException {
-        super();
+        this.conexaoDB = new ConexaoDB();
     }
 
     @Override
@@ -32,7 +35,9 @@ public class ClienteDAO extends DAO implements ClienteDAOCaracteristicas {
         boolean status;
 
         try {
-            this.preparedStatement = this.conexao.prepareStatement(""
+            conexaoDB.conectarBD();
+            
+            conexaoDB.preparedStatement = conexaoDB.conexao.prepareStatement(""
                     + "INSERT INTO CLIENTE ("
                     + "pk_cliente, "
                     + "nome, "
@@ -42,13 +47,13 @@ public class ClienteDAO extends DAO implements ClienteDAOCaracteristicas {
                     + "senha) "
                     + "VALUES (?, ?, ?, ?, ?, ?);");
 
-            this.preparedStatement.setString(1, cliente.getRg());
-            this.preparedStatement.setString(2, cliente.getNome());
-            this.preparedStatement.setString(3, cliente.getEndereco());
-            this.preparedStatement.setString(4, cliente.getEmail());
-            this.preparedStatement.setString(5, cliente.getCpf());
-            this.preparedStatement.setString(6, cliente.getSenha());
-            this.preparedStatement.executeQuery();
+            conexaoDB.preparedStatement.setString(1, cliente.getRg());
+            conexaoDB.preparedStatement.setString(2, cliente.getNome());
+            conexaoDB.preparedStatement.setString(3, cliente.getEndereco());
+            conexaoDB.preparedStatement.setString(4, cliente.getEmail());
+            conexaoDB.preparedStatement.setString(5, cliente.getCpf());
+            conexaoDB.preparedStatement.setString(6, cliente.getSenha());
+            conexaoDB.preparedStatement.executeQuery();
 
             status = true;
 
@@ -74,28 +79,29 @@ public class ClienteDAO extends DAO implements ClienteDAOCaracteristicas {
         Cliente cliente = null;
 
         try {
-            this.preparedStatement = this.conexao.prepareStatement("SELECT * FROM Koyota.CLIENTE WHERE NOME = ?");
+            conexaoDB.conectarBD();
+            conexaoDB.preparedStatement = conexaoDB.conexao.prepareStatement("SELECT * FROM Koyota.CLIENTE WHERE NOME = ?");
 
-            this.preparedStatement.setString(1, name);
+            conexaoDB.preparedStatement.setString(1, name);
 
-            this.resultSet = this.preparedStatement.executeQuery();
+            conexaoDB.resultSet = conexaoDB.preparedStatement.executeQuery();
             System.out.println("Conectei..");
 
-            while (this.resultSet.next()) {
+            while (conexaoDB.resultSet.next()) {
                 cliente = new Cliente();
-                cliente.setIdCliente(this.resultSet.getInt("pk_cliente"));
-                cliente.setNome(this.resultSet.getString("nome"));
-                cliente.setEndereco(this.resultSet.getString("endereco"));
-                cliente.setEmail(this.resultSet.getString("email"));
-                cliente.setCpf(this.resultSet.getString("cpf"));
-                cliente.setSenha(this.resultSet.getString("senha"));
+                cliente.setIdCliente(conexaoDB.resultSet.getInt("pk_cliente"));
+                cliente.setNome(conexaoDB.resultSet.getString("nome"));
+                cliente.setEndereco(conexaoDB.resultSet.getString("endereco"));
+                cliente.setEmail(conexaoDB.resultSet.getString("email"));
+                cliente.setCpf(conexaoDB.resultSet.getString("cpf"));
+                cliente.setSenha(conexaoDB.resultSet.getString("senha"));
             }
 
-            this.fecharConexao();
+            conexaoDB.fecharConexao();
 
         } catch (Exception e) {
             System.out.print("\nErro de conexão...Find by name Clietne");
-            this.fecharConexao();
+            conexaoDB.fecharConexao();
         }
 
         return cliente;

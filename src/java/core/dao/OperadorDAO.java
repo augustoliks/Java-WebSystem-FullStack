@@ -1,6 +1,7 @@
 package core.dao;
 
 import api.dao.OperadorDAOCaracteristicas;
+import api.model.ConexaoDB;
 import api.model.Operador;
 import java.io.IOException;
 import java.sql.Connection;
@@ -12,10 +13,12 @@ import java.sql.SQLException;
  *
  * @author liks
  */
-public class OperadorDAO extends DAO implements OperadorDAOCaracteristicas {
+public class OperadorDAO implements OperadorDAOCaracteristicas {
 
+    private ConexaoDB conexaoDB;
+    
     public OperadorDAO() throws IOException {
-        super();
+        this.conexaoDB = new ConexaoDB();
     }
 
     @Override
@@ -38,28 +41,28 @@ public class OperadorDAO extends DAO implements OperadorDAOCaracteristicas {
         Operador operador = null;
 
         try {
+            conexaoDB.conectarBD();
+            conexaoDB.preparedStatement = conexaoDB.conexao.prepareStatement("SELECT * FROM Koyota.OPERADOR WHERE NOME = ?");
+                    
+            conexaoDB.preparedStatement.setString(1, name);
 
-            this.preparedStatement = this.conexao.prepareStatement("SELECT * FROM Koyota.OPERADOR WHERE NOME = ?");
-
-            this.preparedStatement.setString(1, name);
-
-            this.resultSet = this.preparedStatement.executeQuery();
+            conexaoDB.resultSet = conexaoDB.preparedStatement.executeQuery();
             System.out.println("Conectei..");
             
-            while (this.resultSet.next()) {
+            while (conexaoDB.resultSet.next()) {
                 operador = new Operador();
-                operador.setIdOperador(this.resultSet.getInt("pk_operador"));
-                operador.setNome(this.resultSet.getString("nome"));
-                operador.setEndereco(this.resultSet.getString("endereco"));
-                operador.setEmail(this.resultSet.getString("email"));
-                operador.setCpf(this.resultSet.getString("cpf"));
-                operador.setSenha(this.resultSet.getString("senha"));
+                operador.setIdOperador(conexaoDB.resultSet.getInt("pk_operador"));
+                operador.setNome(conexaoDB.resultSet.getString("nome"));
+                operador.setEndereco(conexaoDB.resultSet.getString("endereco"));
+                operador.setEmail(conexaoDB.resultSet.getString("email"));
+                operador.setCpf(conexaoDB.resultSet.getString("cpf"));
+                operador.setSenha(conexaoDB.resultSet.getString("senha"));
             }
             
-            this.fecharConexao();
+            conexaoDB.fecharConexao();
         
         } catch (SQLException e) {
-            this.fecharConexao();
+            conexaoDB.fecharConexao();
             System.out.print("\nErro de conexão...Find by id usuario ");
         }
 

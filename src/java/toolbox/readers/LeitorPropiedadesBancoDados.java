@@ -32,7 +32,12 @@ public class LeitorPropiedadesBancoDados {
      //   return prop.getProperty("USUARIO");
         return "augustoliks";
     }
-
+    
+    public String getLinkConexao() throws FileNotFoundException, IOException {
+     //   return prop.getProperty("USUARIO");
+        return "jdbc:mariadb://127.0.0.1:3306/Koyota";
+    }
+    
     public String getSenha() throws FileNotFoundException, IOException {
        // return prop.getProperty("SENHA");
         return "root";
