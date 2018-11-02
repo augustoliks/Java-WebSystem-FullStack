@@ -12,5 +12,5 @@ import api.model.Veiculo;
  * @author liks
  */
 public interface CadastroVeiculoCaracteristicas {
-    public boolean insert(Veiculo veiculo);
+    public boolean insercao(Veiculo veiculo);
 }

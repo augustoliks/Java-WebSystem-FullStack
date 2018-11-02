@@ -6,14 +6,15 @@
 package api.dao;
 
 import api.model.Cliente;
+import java.sql.SQLException;
 
 /**
  *
  * @author liks
  */
 public interface ClienteDAOCaracteristicas {
-    public boolean insert(Cliente cliente);
-    public Cliente findById(Long id);
-    public Cliente findByNomeCliente(String nomeCliente);
-    public Cliente findByName(String name);
+    public void insert(Cliente cliente)  throws SQLException;
+    public Cliente findById(Long id) throws SQLException;
+    public Cliente findByNomeCliente(String nomeCliente)  throws SQLException;
+    public Cliente findByName(String name)  throws SQLException;
 }

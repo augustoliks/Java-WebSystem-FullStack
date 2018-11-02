@@ -4,32 +4,39 @@
  * and open the template in the editor.
  */
 package core.servico;
+import api.dao.ClienteDAOCaracteristicas;
 import api.model.Cliente;
 import api.servico.*;
 import core.dao.ClienteDAO;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.websocket.ClientEndpointConfig;
+import java.sql.SQLException;
+
 /**
  *
  * @author liks
  */
 public class CadastroClienteServico implements ClienteServicoCaracacteristicas{
     
+    ClienteDAOCaracteristicas clienteDAOImpl;
+
+    public CadastroClienteServico() throws IOException {
+        clienteDAOImpl = new ClienteDAO();
+    } 
+    
     @Override
-    public boolean insert(Cliente cliente) {
+    public boolean insersao(Cliente cliente) {
         
-        ClienteDAO cadastroDAO = null;
-     
+        boolean status = false;
+        
         try {
-            cadastroDAO = new ClienteDAO();
-        } catch (IOException ex) {
-            System.out.println("Erro de conexao com o ClienteDAO (CadastroClienteServico)");
+            clienteDAOImpl.insert(cliente);
+            status = true;
+        }
+        catch (SQLException e){
+            status = false;
         }
         
-        return cadastroDAO.insert(cliente);
-        
+        return status;
     }
     
 }

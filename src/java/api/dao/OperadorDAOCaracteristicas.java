@@ -6,14 +6,15 @@
 package api.dao;
 
 import api.model.Operador;
+import java.sql.SQLException;
 
 /**
  *
  * @author liks
  */
 public interface OperadorDAOCaracteristicas {
-    public boolean insert(Operador operador);
-    public Operador findById(Long id);
-    public Operador findByNomeCliente(String nomeCliente);
-    public Operador findByName(String name);
+    public void insert(Operador operador) throws SQLException;
+    public Operador findById(Long id) throws SQLException;
+    public Operador findByNomeCliente(String nomeCliente) throws SQLException;
+    public Operador findByName(String name) throws SQLException;
 }

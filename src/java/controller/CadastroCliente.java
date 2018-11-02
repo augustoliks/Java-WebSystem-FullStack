@@ -9,7 +9,6 @@ import api.model.Cliente;
 import api.servico.ClienteServicoCaracacteristicas;
 import core.servico.CadastroClienteServico;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,13 +23,18 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "CadastroCliente", urlPatterns = {"/CadastroCliente"})
 public class CadastroCliente extends HttpServlet {        
     
-    ClienteServicoCaracacteristicas cadastroClienteServico = new CadastroClienteServico();
-    Cliente novoCliente = new Cliente();
+    ClienteServicoCaracacteristicas cadastroClienteImpl;
+
+    public CadastroCliente() throws IOException {
+        cadastroClienteImpl = new CadastroClienteServico();
+    }
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    
+        
+        Cliente novoCliente = new Cliente();
+                
         ServletContext sc = request.getServletContext();
         String nome = request.getParameter("nome");
         String rg = request.getParameter("rg");
@@ -46,7 +50,7 @@ public class CadastroCliente extends HttpServlet {
         novoCliente.setRg(rg);
         novoCliente.setSenha(senha);
         
-        boolean statusCadastro = cadastroClienteServico.insert(novoCliente);
+        boolean statusCadastro = cadastroClienteImpl.insersao(novoCliente);
 
         if (statusCadastro){
             request.setAttribute("statusCadastro", statusCadastro);

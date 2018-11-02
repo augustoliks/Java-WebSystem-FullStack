@@ -5,28 +5,35 @@
  */
 package core.servico;
 
+import api.dao.VeiculoDAOCaracteristicas;
 import api.model.Veiculo;
 import api.servico.CadastroVeiculoCaracteristicas;
 import core.dao.VeiculoDAO;
+import java.io.IOException;
+import java.sql.SQLException;
 
-/**
- *
- * @author liks
- */
 public class CadastroVeiculoServico implements CadastroVeiculoCaracteristicas {
 
-    @Override
-    public boolean insert(Veiculo veiculo) {
-
-        VeiculoDAO veiculoDAO = null;
-
-        boolean status;
-
-        veiculoDAO = new VeiculoDAO();
-
-        veiculoDAO.insert(veiculo);
-     
-        return false;
-
+    VeiculoDAOCaracteristicas veiculoDAOImpl;
+    
+    public CadastroVeiculoServico() throws IOException{
+        veiculoDAOImpl = new VeiculoDAO();
     }
+    
+    @Override
+    public boolean insercao(Veiculo veiculo){
+         
+        boolean status = false;
+        
+        try {
+            veiculoDAOImpl.insert(veiculo);
+            status = true;
+        }
+        catch (SQLException e){
+            status = false;
+        }
+        
+        return status;
+    }
+    
 }

@@ -9,7 +9,6 @@ import api.dao.VeiculoDAOCaracteristicas;
 import api.model.ConexaoDB;
 import api.model.Veiculo;
 import java.io.IOException;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
@@ -25,43 +24,32 @@ public class VeiculoDAO implements VeiculoDAOCaracteristicas {
     }
 
     @Override
-    public boolean insert(Veiculo veiculo) {
+    public void insert(Veiculo veiculo) throws SQLException{
+       
+        conexaoDB.conectarBD();
 
-        boolean status;
-        
-        try {
-            conexaoDB.conectarBD();
+        conexaoDB.preparedStatement = conexaoDB.conexao.prepareStatement(""
+                + "INSERT INTO VEICULO ("
+                + " modelo, "
+                + " ano, "
+                + " fabricante, " //5
+                + " combustivel, " //6
+                + " kilometragem, " //7
+                + " estado_consearvacao, "//8
+                + " cor) " //9
+                + "VALUES (?, ?, ?, ?, ?, ?, ?);");
 
-            conexaoDB.preparedStatement = conexaoDB.conexao.prepareStatement(""
-                    + "INSERT INTO VEICULO ("
-                    + " modelo, "
-                    + " ano, "
-                    + " fabricante, " //5
-                    + " combustivel, " //6
-                    + " kilometragem, " //7
-                    + " estado_consearvacao, "//8
-                    + " cor) " //9
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?);");
+        conexaoDB.preparedStatement.setString(1, veiculo.getModelo());
+        conexaoDB.preparedStatement.setInt(2, veiculo.getAno());
+        conexaoDB.preparedStatement.setString(3, veiculo.getFabricante());
+        conexaoDB.preparedStatement.setString(4, veiculo.getCombustivel());
+        conexaoDB.preparedStatement.setInt(5, veiculo.getKilometragem());
+        conexaoDB.preparedStatement.setString(6, veiculo.getEstadoConservervacao());
+        conexaoDB.preparedStatement.setString(7, veiculo.getCor());
 
-            conexaoDB.preparedStatement.setString(1, veiculo.getModelo());
-            conexaoDB.preparedStatement.setInt(2, veiculo.getAno());
-            conexaoDB.preparedStatement.setString(3, veiculo.getFabricante());
-            conexaoDB.preparedStatement.setString(4, veiculo.getCombustivel());
-            conexaoDB.preparedStatement.setInt(5, veiculo.getKilometragem());
-            conexaoDB.preparedStatement.setString(6, veiculo.getEstadoConservervacao());
-            conexaoDB.preparedStatement.setString(7, veiculo.getCor());
+        conexaoDB.preparedStatement.executeQuery();
 
-            conexaoDB.preparedStatement.executeQuery();
-
-            conexaoDB.preparedStatement.executeQuery();
-            status = true;
-
-        } catch (SQLException e) {
-            System.out.println("Erro no insert CadastroVeiculo");
-            status = false;
-        }
-
-        return status;
+        conexaoDB.fecharConexao();
 
     }
 

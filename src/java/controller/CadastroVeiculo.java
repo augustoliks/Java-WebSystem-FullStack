@@ -7,7 +7,9 @@ package controller;
 
 import api.dao.VeiculoDAOCaracteristicas;
 import api.model.Veiculo;
+import api.servico.CadastroVeiculoCaracteristicas;
 import core.dao.VeiculoDAO;
+import core.servico.CadastroVeiculoServico;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletContext;
@@ -24,13 +26,20 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "CadastroVeiculo", urlPatterns = {"/CadastroVeiculo"})
 public class CadastroVeiculo extends HttpServlet {
 
-    VeiculoDAOCaracteristicas veiculoDAO = new VeiculoDAO();
+    CadastroVeiculoCaracteristicas cadVeiculosServicoImpl;
+    
     Veiculo veiculo = new Veiculo();
+
+    public CadastroVeiculo() throws IOException {
+        this.cadVeiculosServicoImpl = new CadastroVeiculoServico();
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        boolean status = false;
+        
         System.out.println("carlosdgfdngafjsdngkafnjgakfjgafknjgkagn");
         ServletContext sc = request.getServletContext();
 
@@ -54,15 +63,9 @@ public class CadastroVeiculo extends HttpServlet {
         veiculo.setKilometragem(kilometragem);
         veiculo.setModelo(modelo);
         
-        boolean statusCadastro = veiculoDAO.insert(veiculo);
+        status = cadVeiculosServicoImpl.insercao(veiculo);
         
-        if (statusCadastro){
-            request.setAttribute("statusCadastro", statusCadastro);
-        }
-        else{
-            request.setAttribute("statusCadastro", statusCadastro);
-            System.out.println("ERRO DE CADASTRO");
-        }
-        
+        request.setAttribute("statusCadastro", true);
+               
     }
 }

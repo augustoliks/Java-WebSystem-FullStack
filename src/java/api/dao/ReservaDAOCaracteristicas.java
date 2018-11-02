@@ -7,11 +7,12 @@ package api.dao;
 
 import api.model.Cliente;
 import api.model.Reserva;
+import java.sql.SQLException;
 
 /**
  *
  * @author liks
  */
 public interface ReservaDAOCaracteristicas {
-    public boolean insert(Reserva reserva);
+    public boolean insert(Reserva reserva) throws SQLException;
 }

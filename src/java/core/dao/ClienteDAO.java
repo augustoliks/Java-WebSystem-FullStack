@@ -8,15 +8,8 @@ package core.dao;
 import api.dao.ClienteDAOCaracteristicas;
 import api.model.Cliente;
 import api.model.ConexaoDB;
-import api.model.Operador;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -31,37 +24,29 @@ public class ClienteDAO implements ClienteDAOCaracteristicas {
     }
 
     @Override
-    public boolean insert(Cliente cliente) {
+    public void insert(Cliente cliente) throws SQLException{
         boolean status;
+        conexaoDB.conectarBD();
 
-        try {
-            conexaoDB.conectarBD();
-            
-            conexaoDB.preparedStatement = conexaoDB.conexao.prepareStatement(""
-                    + "INSERT INTO CLIENTE ("
-                    + "pk_cliente, "
-                    + "nome, "
-                    + "endereco, "
-                    + "email, "
-                    + "cpf, "
-                    + "senha) "
-                    + "VALUES (?, ?, ?, ?, ?, ?);");
+        conexaoDB.preparedStatement = conexaoDB.conexao.prepareStatement(""
+                + "INSERT INTO CLIENTE ("
+                + "pk_cliente, "
+                + "nome, "
+                + "endereco, "
+                + "email, "
+                + "cpf, "
+                + "senha) "
+                + "VALUES (?, ?, ?, ?, ?, ?);");
 
-            conexaoDB.preparedStatement.setString(1, cliente.getRg());
-            conexaoDB.preparedStatement.setString(2, cliente.getNome());
-            conexaoDB.preparedStatement.setString(3, cliente.getEndereco());
-            conexaoDB.preparedStatement.setString(4, cliente.getEmail());
-            conexaoDB.preparedStatement.setString(5, cliente.getCpf());
-            conexaoDB.preparedStatement.setString(6, cliente.getSenha());
-            conexaoDB.preparedStatement.executeQuery();
+        conexaoDB.preparedStatement.setString(1, cliente.getRg());
+        conexaoDB.preparedStatement.setString(2, cliente.getNome());
+        conexaoDB.preparedStatement.setString(3, cliente.getEndereco());
+        conexaoDB.preparedStatement.setString(4, cliente.getEmail());
+        conexaoDB.preparedStatement.setString(5, cliente.getCpf());
+        conexaoDB.preparedStatement.setString(6, cliente.getSenha());
+        
+        conexaoDB.preparedStatement.executeQuery();
 
-            status = true;
-
-        } catch (Exception e) {
-            System.out.println("Erro no insert CadastroCliente");
-            status = false;
-        }
-        return status;
     }
 
     @Override
@@ -75,37 +60,30 @@ public class ClienteDAO implements ClienteDAOCaracteristicas {
     }
 
     @Override
-    public Cliente findByName(String name) {
+    public Cliente findByName(String name) throws SQLException{
         Cliente cliente = null;
 
-        try {
-            conexaoDB.conectarBD();
-            conexaoDB.preparedStatement = conexaoDB.conexao.prepareStatement("SELECT * FROM Koyota.CLIENTE WHERE NOME = ?");
+        conexaoDB.conectarBD();
+        conexaoDB.preparedStatement = conexaoDB.conexao.prepareStatement("SELECT * FROM Koyota.CLIENTE WHERE NOME = ?");
 
-            conexaoDB.preparedStatement.setString(1, name);
+        conexaoDB.preparedStatement.setString(1, name);
 
-            conexaoDB.resultSet = conexaoDB.preparedStatement.executeQuery();
-            System.out.println("Conectei..");
+        conexaoDB.resultSet = conexaoDB.preparedStatement.executeQuery();
+        System.out.println("Conectei..");
 
-            while (conexaoDB.resultSet.next()) {
-                cliente = new Cliente();
-                cliente.setIdCliente(conexaoDB.resultSet.getInt("pk_cliente"));
-                cliente.setNome(conexaoDB.resultSet.getString("nome"));
-                cliente.setEndereco(conexaoDB.resultSet.getString("endereco"));
-                cliente.setEmail(conexaoDB.resultSet.getString("email"));
-                cliente.setCpf(conexaoDB.resultSet.getString("cpf"));
-                cliente.setSenha(conexaoDB.resultSet.getString("senha"));
-            }
-
-            conexaoDB.fecharConexao();
-
-        } catch (Exception e) {
-            System.out.print("\nErro de conexão...Find by name Clietne");
-            conexaoDB.fecharConexao();
+        while (conexaoDB.resultSet.next()) {
+            cliente = new Cliente();
+            cliente.setIdCliente(conexaoDB.resultSet.getInt("pk_cliente"));
+            cliente.setNome(conexaoDB.resultSet.getString("nome"));
+            cliente.setEndereco(conexaoDB.resultSet.getString("endereco"));
+            cliente.setEmail(conexaoDB.resultSet.getString("email"));
+            cliente.setCpf(conexaoDB.resultSet.getString("cpf"));
+            cliente.setSenha(conexaoDB.resultSet.getString("senha"));
         }
 
+        conexaoDB.fecharConexao();
+        
         return cliente;
-
     }
 
 }

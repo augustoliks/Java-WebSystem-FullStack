@@ -12,6 +12,8 @@ import api.servico.LoginCaracteristicas;
 import core.dao.ClienteDAO;
 import core.dao.OperadorDAO;
 import java.io.IOException;
+import java.sql.SQLException;
+
 
 /**
  *
@@ -19,21 +21,31 @@ import java.io.IOException;
  */
 public class LoginServico implements LoginCaracteristicas {
 
+ 
     @Override
-    public Pessoa findByNomeUsuario(String nomeUsuario) {
+    public Pessoa findByNomeUsuario(String nomeUsuario)  {
 
         ClienteDAO clienteDAO = null;
         OperadorDAO operadorDAO = null;
+        
+        Operador operadorBD = null;
+        Cliente clienteBD = null;
 
         try {
             clienteDAO = new ClienteDAO();
             operadorDAO = new OperadorDAO();
-        } catch (IOException ex) {
-            System.out.println(">>>\tErro de conexao ClienteDAO ou OperadorDAO");
-        }
 
-        Operador operadorBD = operadorDAO.findByName(nomeUsuario);
-        Cliente clienteBD = clienteDAO.findByName(nomeUsuario);
+            operadorBD = operadorDAO.findByName(nomeUsuario);
+            clienteBD = clienteDAO.findByName(nomeUsuario);
+            
+        } catch (IOException ex) {
+            System.out.println(ex.toString());
+            return null;
+      
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+            return null;
+        }
 
         if (operadorBD != null) {
             return operadorBD;

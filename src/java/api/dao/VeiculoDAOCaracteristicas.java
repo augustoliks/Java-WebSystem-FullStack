@@ -6,11 +6,12 @@
 package api.dao;
 
 import api.model.Veiculo;
+import java.sql.SQLException;
 
 /**
  *
  * @author liks
  */
 public interface VeiculoDAOCaracteristicas {    
-    public boolean insert(Veiculo veiculo);
+    public void insert(Veiculo veiculo) throws SQLException;
 }

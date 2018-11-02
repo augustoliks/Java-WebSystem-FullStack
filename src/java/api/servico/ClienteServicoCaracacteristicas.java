@@ -12,5 +12,5 @@ import api.model.Cliente;
  * @author liks
  */
 public interface ClienteServicoCaracacteristicas {
-    public boolean insert(Cliente cliente);
+    public boolean insersao(Cliente cliente);
 }
