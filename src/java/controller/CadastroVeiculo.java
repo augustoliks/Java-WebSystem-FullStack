@@ -40,7 +40,6 @@ public class CadastroVeiculo extends HttpServlet {
 
         boolean status = false;
         
-        System.out.println("carlosdgfdngafjsdngkafnjgakfjgafknjgkagn");
         ServletContext sc = request.getServletContext();
 
         int ano = Integer.valueOf(request.getParameter("ano"));
@@ -51,7 +50,7 @@ public class CadastroVeiculo extends HttpServlet {
         int kilometragem = Integer.valueOf(request.getParameter("kilometragem"));
         String conservacao = request.getParameter("conservacao");
         String combustivel = request.getParameter("combustivel");
-        String categoria = "Esportivo";//request.getParameter("categoria");
+        String categoria = "Luxo";//request.getParameter("categoria");
 
         veiculo.setAno(ano);
         veiculo.setCategoria(categoria);        
@@ -65,7 +64,7 @@ public class CadastroVeiculo extends HttpServlet {
         
         status = cadVeiculosServicoImpl.insercao(veiculo);
         
-        request.setAttribute("statusCadastro", true);
+        request.setAttribute("statusCadastro", status);
                
     }
 }

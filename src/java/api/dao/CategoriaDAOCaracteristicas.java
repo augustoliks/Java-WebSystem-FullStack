@@ -5,10 +5,11 @@
  */
 package api.dao;
 
-/**
- *
- * @author liks
- */
+import api.model.Categoria;
+import java.sql.SQLException;
+import java.util.List;
+
 public interface CategoriaDAOCaracteristicas {
-    
+    public Categoria findByName(String categoria) throws SQLException;
+    public List findAll() throws SQLException;
 }

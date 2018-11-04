@@ -11,15 +11,15 @@ package api.model;
  */
 public class Categoria {
 
-    private long idCategoria;
+    private int idCategoria;
     private String nome;
     private String valor;
 
-    public long getIdCategoria() {
+    public int getIdCategoria() {
         return idCategoria;
     }
 
-    public void setIdCategoria(long idCategoria) {
+    public void setIdCategoria(int idCategoria) {
         this.idCategoria = idCategoria;
     }
 
