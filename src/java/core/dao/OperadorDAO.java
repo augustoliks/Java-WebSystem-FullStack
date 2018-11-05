@@ -5,6 +5,8 @@ import api.model.ConexaoDB;
 import api.model.Operador;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,10 +16,6 @@ public class OperadorDAO implements OperadorDAOCaracteristicas {
 
     private ConexaoDB conexaoDB;
     
-    public OperadorDAO() throws IOException {
-        this.conexaoDB = new ConexaoDB();
-    }
-
     @Override
     public void insert(Operador operador) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -35,6 +33,13 @@ public class OperadorDAO implements OperadorDAOCaracteristicas {
 
     @Override
     public Operador findByName(String name)  throws SQLException{
+        
+        try {
+            this.conexaoDB = new ConexaoDB();
+        } catch (IOException ex) {
+            Logger.getLogger(OperadorDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         Operador operador = null;
 
         conexaoDB.conectarBD();
@@ -47,7 +52,7 @@ public class OperadorDAO implements OperadorDAOCaracteristicas {
         
         while (conexaoDB.resultSet.next()) {
             operador = new Operador();
-            operador.setIdOperador(conexaoDB.resultSet.getInt("pk_operador"));
+            operador.setId(conexaoDB.resultSet.getInt("pk_operador"));
             operador.setNome(conexaoDB.resultSet.getString("nome"));
             operador.setEndereco(conexaoDB.resultSet.getString("endereco"));
             operador.setEmail(conexaoDB.resultSet.getString("email"));

@@ -11,21 +11,15 @@ import java.util.Date;
  *
  * @author liks
  */
-public class Reserva {
+public class Reserva extends Identificador{
 
-    private long idReserva;
+    private Cliente cliente;
+    private Veiculo veiculo;
+    private Reserva reserva;
     private Date dataHoraInicio;
     private Date dataHoraTermino;
-    private Date valorPrevisto;    
-
-    public long getIdReserva() {
-        return idReserva;
-    }
-
-    public void setIdReserva(long idReserva) {
-        this.idReserva = idReserva;
-    }
-
+    private float valorPrevisto;    
+    
     public Date getDataHoraInicio() {
         return dataHoraInicio;
     }
@@ -42,13 +36,37 @@ public class Reserva {
         this.dataHoraTermino = dataHoraTermino;
     }
 
-    public Date getValorPrevisto() {
+    public float getValorPrevisto() {
         return valorPrevisto;
     }
 
-    public void setValorPrevisto(Date valorPrevisto) {
+    public void setValorPrevisto(float valorPrevisto) {
         this.valorPrevisto = valorPrevisto;
     }
-    
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Veiculo getVeiculo() {
+        return veiculo;
+    }
+
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
+    }
+
+    public Reserva getReserva() {
+        return reserva;
+    }
+
+    public void setReserva(Reserva reserva) {
+        this.reserva = reserva;
+    }
+
     
 }

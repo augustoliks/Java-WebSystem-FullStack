@@ -11,24 +11,20 @@ import java.util.Date;
  *
  * @author liks
  */
-public class Contratro {
-
-    private long idContrato;
-    private Date dataHoraRetirada;
+public class Contratro extends Identificador{
+    
     private String DescricaoAcrescimo;
+
     private Double valorAcrescimo;
     private Double valorPagoAntecipadamente;
     private Double valorTotalReserva;
+
+    private Date dataHoraRetirada;
     private Date dataHoraDevolucao;
 
-    public long getIdContrato() {
-        return idContrato;
-    }
-
-    public void setIdContrato(long idContrato) {
-        this.idContrato = idContrato;
-    }
-
+    private Reserva reserva;
+    private Operador operador;
+    
     public String getDescricaoAcrescimo() {
         return DescricaoAcrescimo;
     }
@@ -75,6 +71,26 @@ public class Contratro {
 
     public void setDataHoraRetirada(Date dataHoraRetirada) {
         this.dataHoraRetirada = dataHoraRetirada;
+    }
+
+    public Reserva getReserva() {
+        return reserva;
+    }
+
+    public void setReserva(Reserva reserva) {
+        this.reserva = reserva;
+    }
+
+    public Operador getOperador() {
+        return operador;
+    }
+
+    public void setOperador(Operador operador) {
+        this.operador = operador;
+    }
+
+    public Double getValorFinal() {
+        return this.valorAcrescimo + this.valorTotalReserva - valorPagoAntecipadamente;
     }
 
 }

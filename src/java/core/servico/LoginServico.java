@@ -13,6 +13,8 @@ import core.dao.ClienteDAO;
 import core.dao.OperadorDAO;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -21,32 +23,23 @@ import java.sql.SQLException;
  */
 public class LoginServico implements LoginCaracteristicas {
 
- 
+
     @Override
     public Pessoa findByNomeUsuario(String nomeUsuario)  {
-
-        ClienteDAO clienteDAO = null;
-        OperadorDAO operadorDAO = null;
         
         Operador operadorBD = null;
         Cliente clienteBD = null;
-
+        
+        ClienteDAO clienteDAO = new ClienteDAO();
+        OperadorDAO operadorDAO = new OperadorDAO();
+        
         try {
-            clienteDAO = new ClienteDAO();
-            operadorDAO = new OperadorDAO();
-
             operadorBD = operadorDAO.findByName(nomeUsuario);
             clienteBD = clienteDAO.findByName(nomeUsuario);
-            
-        } catch (IOException ex) {
-            System.out.println(ex.toString());
-            return null;
-      
         } catch (SQLException ex) {
-            System.out.println(ex.toString());
-            return null;
+            Logger.getLogger(LoginServico.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         if (operadorBD != null) {
             return operadorBD;
         } else if (clienteBD != null) {

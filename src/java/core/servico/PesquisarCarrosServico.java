@@ -26,24 +26,23 @@ public class PesquisarCarrosServico implements PesquisarCarrosCaracteristicas{
 
     VeiculoDAOCaracteristicas veiculoDAOImpl;
     CategoriaDAOCaracteristicas categoriaDAOImpl;
-    
-    public PesquisarCarrosServico() throws IOException{
-        veiculoDAOImpl = new VeiculoDAO();
-        categoriaDAOImpl = new CategoriaDAO();
-    }
 
     @Override
     public String pesquisarCarros(String nomeCategoria) {
+
+        veiculoDAOImpl = new VeiculoDAO();
+        categoriaDAOImpl = new CategoriaDAO();
         
         Categoria categoria = null;
         List<Veiculo> carros = null;
         
         try {
             categoria = categoriaDAOImpl.findByName(nomeCategoria);
-            carros = veiculoDAOImpl.findCarsByCategoria(categoria.getIdCategoria());
+            carros = veiculoDAOImpl.findCarsByCategoria(categoria.getId());
             
         } catch (SQLException ex) {
-            System.out.println("core.servico.PesquisarCarrosServico.pesquisarCarros()");
+            System.out.println();
+            System.out.println(ex.toString());
         }
     
         String jsonCarros = new Gson().toJson(carros);

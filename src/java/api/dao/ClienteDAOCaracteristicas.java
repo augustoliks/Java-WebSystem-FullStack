@@ -14,7 +14,7 @@ import java.sql.SQLException;
  */
 public interface ClienteDAOCaracteristicas {
     public void insert(Cliente cliente)  throws SQLException;
-    public Cliente findById(Long id) throws SQLException;
+    public Cliente findById(int id) throws SQLException;
     public Cliente findByNomeCliente(String nomeCliente)  throws SQLException;
     public Cliente findByName(String name)  throws SQLException;
 }

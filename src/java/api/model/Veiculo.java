@@ -5,39 +5,45 @@
  */
 package api.model;
 
+import java.lang.reflect.Constructor;
+
 
 /**
  *
  * @author liks
  */
-public class Veiculo {
+public class Veiculo extends Identificador {
 
-    private long idVeiculo;
     private String modelo;
     private int ano;
     private String fabricante;
     private String combustivel;
     private int kilometragem;
-    private String estadoConservervacao;
+    private int estadoConservervacao;
     private String cor;
-    private String categoria;
+    private Categoria categoria;
 
-    public String getCategoria() {
+    public Veiculo() {}
+    
+    public Veiculo(String modelo, int ano, String fabricante, String combustivel, int kilometragem, int estadoConservervacao, String cor, Categoria categoria) {
+        this.setModelo(modelo);
+        this.setAno(ano);
+        this.setFabricante(fabricante);
+        this.setCombustivel(combustivel);
+        this.setKilometragem(kilometragem);
+        this.setEstadoConservervacao(estadoConservervacao);
+        this.setCor(cor);
+        this.setCategoria(categoria);
+    }
+    
+    public Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
     
-    public long getIdVeiculo() {
-        return idVeiculo;
-    }
-
-    public void setIdVeiculo(long idVeiculo) {
-        this.idVeiculo = idVeiculo;
-    }
-
     public String getModelo() {
         return modelo;
     }
@@ -78,11 +84,11 @@ public class Veiculo {
         this.kilometragem = kilometragem;
     }
 
-    public String getEstadoConservervacao() {
+    public int getEstadoConservervacao() {
         return estadoConservervacao;
     }
 
-    public void setEstadoConservervacao(String estadoConservervacao) {
+    public void setEstadoConservervacao(int estadoConservervacao) {
         this.estadoConservervacao = estadoConservervacao;
     }
 

@@ -3,15 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package api.model;
+package api.servico;
 
+import api.model.Reserva;
 
 /**
  *
- * @author liks
+ * @author visita
  */
-public class Operador extends Pessoa{
-    public Operador() {
-        super();
-    }
+public interface ReservarVeiculosCaracacteristicas {
+    public boolean cadastroVeiculo(Reserva reserva);
 }

@@ -21,21 +21,20 @@ import javax.servlet.http.HttpServletResponse;
  * @author liks
  */
 @WebServlet(name = "CadastroCliente", urlPatterns = {"/CadastroCliente"})
-public class CadastroCliente extends HttpServlet {        
-    
-    ClienteServicoCaracacteristicas cadastroClienteImpl;
-
-    public CadastroCliente() throws IOException {
-        cadastroClienteImpl = new CadastroClienteServico();
-    }
+public class CadastroCliente extends HttpServlet {
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+       
+        ClienteServicoCaracacteristicas cadastroClienteImpl;
+     
+        cadastroClienteImpl = new CadastroClienteServico();
         
         Cliente novoCliente = new Cliente();
                 
         ServletContext sc = request.getServletContext();
+        
         String nome = request.getParameter("nome");
         String rg = request.getParameter("rg");
         String cpf = request.getParameter("cpf");

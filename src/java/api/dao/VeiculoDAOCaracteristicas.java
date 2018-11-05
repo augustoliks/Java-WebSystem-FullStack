@@ -14,6 +14,8 @@ import java.util.List;
  * @author liks
  */
 public interface VeiculoDAOCaracteristicas {    
-    public void insert(Veiculo veiculo, int categoriaID) throws SQLException;
+    public void insert(Veiculo veiculo) throws SQLException;
     public List findCarsByCategoria(int categoriaID) throws SQLException;
+    public Veiculo findById(int idVeiculo) throws SQLException;
+    public List findAll() throws SQLException;
 }

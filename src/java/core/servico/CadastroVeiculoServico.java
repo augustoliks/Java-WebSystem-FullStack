@@ -14,30 +14,30 @@ import core.dao.CategoriaDAO;
 import core.dao.VeiculoDAO;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CadastroVeiculoServico implements CadastroVeiculoCaracteristicas {
-
-    VeiculoDAOCaracteristicas veiculoDAOImpl;
-    CategoriaDAOCaracteristicas categoriaDAOImpl;
-    
-    public CadastroVeiculoServico() throws IOException{
-        veiculoDAOImpl = new VeiculoDAO();
-        categoriaDAOImpl = new CategoriaDAO();
-    }
     
     @Override
     public boolean insercao(Veiculo veiculo){
-         
+        
+        VeiculoDAOCaracteristicas veiculoDAOImpl;
+        CategoriaDAOCaracteristicas categoriaDAOImpl;
+        
+        veiculoDAOImpl = new VeiculoDAO();
+        categoriaDAOImpl = new CategoriaDAO();
+        
         boolean status = false;
         Categoria categoriaDB = null;
         
         try {
-            categoriaDB = categoriaDAOImpl.findByName(veiculo.getCategoria());
-            veiculoDAOImpl.insert(veiculo, categoriaDB.getIdCategoria());
+            categoriaDB = categoriaDAOImpl.findByName(veiculo.getCategoria().getNome());
+            veiculo.setCategoria(categoriaDB); 
+            veiculoDAOImpl.insert(veiculo);
             status = true;
         }
-        catch (SQLException e){
-            
+        catch (SQLException e){           
             status = false;
             System.out.println(e.toString());
         }

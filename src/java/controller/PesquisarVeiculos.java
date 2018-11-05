@@ -27,8 +27,7 @@ public class PesquisarVeiculos extends HttpServlet {
         PesquisarCarrosCaracteristicas pesquisarCarrosImpl;
         pesquisarCarrosImpl = new PesquisarCarrosServico();
         
-        String jsonListaCarros = pesquisarCarrosImpl.pesquisarCarros(categoria);  
-            
+        String jsonListaCarros = pesquisarCarrosImpl.pesquisarCarros(categoria);
             
      try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -43,8 +42,5 @@ public class PesquisarVeiculos extends HttpServlet {
             out.println("</html>");
         }            
     }
-    
-    
-
 
 }

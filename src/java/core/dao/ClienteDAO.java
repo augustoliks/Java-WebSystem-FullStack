@@ -10,6 +10,8 @@ import api.model.Cliente;
 import api.model.ConexaoDB;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,13 +21,17 @@ public class ClienteDAO implements ClienteDAOCaracteristicas {
 
     private ConexaoDB conexaoDB;
     
-    public ClienteDAO() throws IOException {
-        this.conexaoDB = new ConexaoDB();
-    }
-
     @Override
     public void insert(Cliente cliente) throws SQLException{
+       
+        try {
+            this.conexaoDB = new ConexaoDB();
+        } catch (IOException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         boolean status;
+
         conexaoDB.conectarBD();
 
         conexaoDB.preparedStatement = conexaoDB.conexao.prepareStatement(""
@@ -50,7 +56,7 @@ public class ClienteDAO implements ClienteDAOCaracteristicas {
     }
 
     @Override
-    public Cliente findById(Long id) {
+    public Cliente findById(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -61,6 +67,13 @@ public class ClienteDAO implements ClienteDAOCaracteristicas {
 
     @Override
     public Cliente findByName(String name) throws SQLException{
+
+        try {
+            this.conexaoDB = new ConexaoDB();
+        } catch (IOException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         Cliente cliente = null;
 
         conexaoDB.conectarBD();
@@ -73,17 +86,16 @@ public class ClienteDAO implements ClienteDAOCaracteristicas {
 
         while (conexaoDB.resultSet.next()) {
             cliente = new Cliente();
-            cliente.setIdCliente(conexaoDB.resultSet.getInt("pk_cliente"));
+            cliente.setId(conexaoDB.resultSet.getInt("pk_cliente"));
             cliente.setNome(conexaoDB.resultSet.getString("nome"));
             cliente.setEndereco(conexaoDB.resultSet.getString("endereco"));
             cliente.setEmail(conexaoDB.resultSet.getString("email"));
             cliente.setCpf(conexaoDB.resultSet.getString("cpf"));
             cliente.setSenha(conexaoDB.resultSet.getString("senha"));
         }
-
+        
         conexaoDB.fecharConexao();
         
         return cliente;
     }
-
 }

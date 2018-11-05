@@ -7,16 +7,15 @@ package api.model;
 
 /**
  *
- * @author liks
+ * @author visita
  */
-public abstract class Pessoa {
-    
+public class Pessoa extends Identificador{
     private String nome;
-    private String rg;
-    private String cpf;
-    private String email;
-    private String senha;
     private String endereco;
+    private String email;
+    private String cpf;
+    private String senha;
+    private String rg;
 
     public String getNome() {
         return nome;
@@ -26,20 +25,12 @@ public abstract class Pessoa {
         this.nome = nome;
     }
 
-    public String getRg() {
-        return rg;
+    public String getEndereco() {
+        return endereco;
     }
 
-    public void setRg(String rg) {
-        this.rg = rg;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 
     public String getEmail() {
@@ -50,6 +41,14 @@ public abstract class Pessoa {
         this.email = email;
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
     public String getSenha() {
         return senha;
     }
@@ -58,12 +57,11 @@ public abstract class Pessoa {
         this.senha = senha;
     }
 
-    public String getEndereco() {
-        return endereco;
+    public String getRg() {
+        return rg;
     }
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
+    public void setRg(String rg) {
+        this.rg = rg;
     }
-    
 }

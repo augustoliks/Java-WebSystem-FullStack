@@ -10,23 +10,22 @@ import api.servico.*;
 import core.dao.ClienteDAO;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author liks
  */
 public class CadastroClienteServico implements ClienteServicoCaracacteristicas{
-    
-    ClienteDAOCaracteristicas clienteDAOImpl;
-
-    public CadastroClienteServico() throws IOException {
-        clienteDAOImpl = new ClienteDAO();
-    } 
-    
+ 
     @Override
     public boolean insersao(Cliente cliente) {
         
+        ClienteDAOCaracteristicas clienteDAOImpl = null;
         boolean status = false;
+        
+        clienteDAOImpl = new ClienteDAO();
         
         try {
             clienteDAOImpl.insert(cliente);
@@ -34,6 +33,7 @@ public class CadastroClienteServico implements ClienteServicoCaracacteristicas{
         }
         catch (SQLException e){
             status = false;
+            System.out.println(e.toString());
         }
         
         return status;

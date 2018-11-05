@@ -43,9 +43,9 @@ public class CategoriaDAO implements CategoriaDAOCaracteristicas{
         categoria = new Categoria();
         
         while (conexaoDB.resultSet.next()) {
-            categoria.setIdCategoria(conexaoDB.resultSet.getInt("pk_categoria"));
+            categoria.setId(conexaoDB.resultSet.getInt("pk_categoria"));
             categoria.setNome(conexaoDB.resultSet.getString("nome"));
-            categoria.setValor(conexaoDB.resultSet.getString("valor"));
+            categoria.setValor(conexaoDB.resultSet.getFloat("valor"));
          }
         conexaoDB.fecharConexao();
         
@@ -63,9 +63,9 @@ public class CategoriaDAO implements CategoriaDAOCaracteristicas{
         
         while (conexaoDB.resultSet.next()) {
             categoria = new Categoria();
-            categoria.setIdCategoria(conexaoDB.resultSet.getInt("pk_categoria"));
+            categoria.setId(conexaoDB.resultSet.getInt("pk_categoria"));
             categoria.setNome(conexaoDB.resultSet.getString("nome"));
-            categoria.setValor(conexaoDB.resultSet.getString("valor"));
+            categoria.setValor(conexaoDB.resultSet.getInt("valor"));
             categorias.add(categoria);
         }
         

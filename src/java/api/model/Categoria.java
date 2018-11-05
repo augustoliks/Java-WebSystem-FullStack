@@ -9,19 +9,10 @@ package api.model;
  *
  * @author liks
  */
-public class Categoria {
+public class Categoria extends Identificador {
 
-    private int idCategoria;
     private String nome;
-    private String valor;
-
-    public int getIdCategoria() {
-        return idCategoria;
-    }
-
-    public void setIdCategoria(int idCategoria) {
-        this.idCategoria = idCategoria;
-    }
+    private float valor;
 
     public String getNome() {
         return nome;
@@ -31,11 +22,11 @@ public class Categoria {
         this.nome = nome;
     }
 
-    public String getValor() {
+    public float getValor() {
         return valor;
     }
 
-    public void setValor(String valor) {
+    public void setValor(float valor) {
         this.valor = valor;
     }
     

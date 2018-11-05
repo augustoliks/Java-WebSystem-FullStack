@@ -5,13 +5,21 @@
  */
 package api.model;
 
+import core.servico.*;
 
 /**
  *
- * @author liks
+ * @author visita
  */
-public class Operador extends Pessoa{
-    public Operador() {
-        super();
+public class Identificador {
+    private int id;
+
+    public int getId() {
+        return id;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
 }

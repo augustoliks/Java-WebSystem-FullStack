@@ -6,6 +6,7 @@
 package controller;
 
 import api.dao.VeiculoDAOCaracteristicas;
+import api.model.Categoria;
 import api.model.Veiculo;
 import api.servico.CadastroVeiculoCaracteristicas;
 import core.dao.VeiculoDAO;
@@ -26,20 +27,23 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "CadastroVeiculo", urlPatterns = {"/CadastroVeiculo"})
 public class CadastroVeiculo extends HttpServlet {
 
-    CadastroVeiculoCaracteristicas cadVeiculosServicoImpl;
-    
-    Veiculo veiculo = new Veiculo();
-
-    public CadastroVeiculo() throws IOException {
-        this.cadVeiculosServicoImpl = new CadastroVeiculoServico();
-    }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        boolean status = false;
+        try {
+            request.setCharacterEncoding("UTF-8");
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+
+        CadastroVeiculoCaracteristicas cadVeiculosServicoImpl;
+        cadVeiculosServicoImpl = new CadastroVeiculoServico();
+   
+        Veiculo veiculo = new Veiculo();
         
+        boolean status = false;
+
         ServletContext sc = request.getServletContext();
 
         int ano = Integer.valueOf(request.getParameter("ano"));
@@ -48,23 +52,25 @@ public class CadastroVeiculo extends HttpServlet {
         String fabricante = request.getParameter("fabricante");
         String cor = request.getParameter("cor");
         int kilometragem = Integer.valueOf(request.getParameter("kilometragem"));
-        String conservacao = request.getParameter("conservacao");
+        int conservacao = Integer.valueOf(request.getParameter("conservacao"));
         String combustivel = request.getParameter("combustivel");
-        String categoria = "Luxo";//request.getParameter("categoria");
+        String categoria = request.getParameter("categoria");
 
         veiculo.setAno(ano);
-        veiculo.setCategoria(categoria);        
         veiculo.setCombustivel(combustivel);
         veiculo.setCor(cor);
         veiculo.setEstadoConservervacao(conservacao);
         veiculo.setFabricante(fabricante);
-        veiculo.setIdVeiculo(ano);
+        veiculo.setId(ano);
         veiculo.setKilometragem(kilometragem);
         veiculo.setModelo(modelo);
-        
+
+        veiculo.setCategoria(new Categoria());
+        veiculo.getCategoria().setNome(categoria);
+
         status = cadVeiculosServicoImpl.insercao(veiculo);
-        
+
         request.setAttribute("statusCadastro", status);
-               
+
     }
 }
