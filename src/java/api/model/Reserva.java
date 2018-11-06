@@ -6,6 +6,7 @@
 package api.model;
 
 import java.util.Date;
+import org.joda.time.DateTime;
 
 /**
  *
@@ -16,23 +17,23 @@ public class Reserva extends Identificador{
     private Cliente cliente;
     private Veiculo veiculo;
     private Reserva reserva;
-    private Date dataHoraInicio;
-    private Date dataHoraTermino;
+    private DateTime dataHoraInicio;
+    private DateTime dataHoraTermino;
     private float valorPrevisto;    
     
-    public Date getDataHoraInicio() {
+    public DateTime getDataHoraInicio() {
         return dataHoraInicio;
     }
 
-    public void setDataHoraInicio(Date dataHoraInicio) {
+    public void setDataHoraInicio(DateTime dataHoraInicio) {
         this.dataHoraInicio = dataHoraInicio;
     }
 
-    public Date getDataHoraTermino() {
+    public DateTime getDataHoraTermino() {
         return dataHoraTermino;
     }
 
-    public void setDataHoraTermino(Date dataHoraTermino) {
+    public void setDataHoraTermino(DateTime dataHoraTermino) {
         this.dataHoraTermino = dataHoraTermino;
     }
 

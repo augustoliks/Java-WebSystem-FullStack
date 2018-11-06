@@ -13,12 +13,15 @@ import core.servico.ReservarVeiculoServico;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
+import org.joda.time.format.DateTimeFormatter;
 import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 
 /**
  *
@@ -28,44 +31,38 @@ import javax.servlet.http.HttpServletResponse;
 public class ReservarVeiculo extends HttpServlet {
 
     ReservarVeiculosCaracacteristicas reservarVeiculosImpl;
-    
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         reservarVeiculosImpl = new ReservarVeiculoServico();
         Reserva reserva = new Reserva();
         DateFormat f = DateFormat.getDateInstance();
-        
+
         String dataHoraInicio = request.getParameter("date_ini");
         String dataHoraFim = request.getParameter("date_fim");
         float valorPrevisto = Float.valueOf(request.getParameter("valor_pre"));
         int idVeiculo = Integer.valueOf(request.getParameter("id_veiculo"));
         int idCliente = Integer.valueOf(request.getParameter("id_cliente"));
 
-        Date dataHoraInicoFormatada = null;
-        Date dataHoraFimFormatada = null;
-        
-        try { 
-            dataHoraInicoFormatada = f.parse(dataHoraInicio);        
-            dataHoraFimFormatada = f.parse(dataHoraFim);
-        } catch (ParseException ex) {
-            System.out.println(ex.toString());
-        }
-        
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss");
+
+        DateTime dataHoraInicoFormatada = formatter.parseDateTime(dataHoraInicio);
+        DateTime dataHoraFimFormatada = formatter.parseDateTime(dataHoraInicio);
+
         reserva.setDataHoraInicio(dataHoraInicoFormatada);
         reserva.setDataHoraTermino(dataHoraFimFormatada);
         reserva.setValorPrevisto(valorPrevisto);
-    
+
         reserva.setCliente(new Cliente());
         reserva.setVeiculo(new Veiculo());
-        
+
         reserva.getCliente().setId(idCliente);
         reserva.getVeiculo().setId(idVeiculo);
-        
+
         boolean statusCadastro = reservarVeiculosImpl.cadastroVeiculo(reserva);
-/*
+        /*
         if (statusCadastro){
             request.setAttribute("statusCadastro", statusCadastro);
         }
@@ -73,7 +70,7 @@ public class ReservarVeiculo extends HttpServlet {
             request.setAttribute("statusCadastro", statusCadastro);
             System.out.println("ERRO DE CADASTRO");
         }
-  */      
+         */
     }
 
 }

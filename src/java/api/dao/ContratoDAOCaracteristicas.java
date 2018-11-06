@@ -5,10 +5,18 @@
  */
 package api.dao;
 
+import api.model.Contrato;
+import java.sql.SQLException;
+
 /**
  *
  * @author liks
  */
 public interface ContratoDAOCaracteristicas {
+
+    public void insert(Contrato contrato) throws SQLException;
+    public Contrato findById(int idCategoria) throws SQLException;
+    public void update(Contrato contrato) throws SQLException;
     
+
 }

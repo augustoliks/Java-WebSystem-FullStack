@@ -6,11 +6,17 @@
 package core.dao;
 
 import api.dao.ReservaDAOCaracteristicas;
+import api.model.Cliente;
 import api.model.ConexaoDB;
 import api.model.Reserva;
+import api.model.Veiculo;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.joda.time.DateTime;
 
 
 public class ReservaDAO implements ReservaDAOCaracteristicas{
@@ -46,8 +52,8 @@ public class ReservaDAO implements ReservaDAOCaracteristicas{
         conexaoDB.preparedStatement.setInt(1, reserva.getCliente().getId());
         conexaoDB.preparedStatement.setInt(2, reserva.getVeiculo().getId());
         
-        conexaoDB.preparedStatement.setDate(3, new java.sql.Date( reserva.getDataHoraInicio().getTime() ) );
-        conexaoDB.preparedStatement.setDate(4, new java.sql.Date( reserva.getDataHoraTermino().getTime() ) );
+        conexaoDB.preparedStatement.setDate(3, new java.sql.Date( reserva.getDataHoraInicio().toDate().getTime() ) );
+        conexaoDB.preparedStatement.setDate(4, new java.sql.Date( reserva.getDataHoraTermino().toDate().getTime() ) );
         
         conexaoDB.preparedStatement.setFloat(5, reserva.getValorPrevisto());
         
@@ -62,12 +68,86 @@ public class ReservaDAO implements ReservaDAOCaracteristicas{
 
     @Override
     public List findAll() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            this.conexaoDB = new ConexaoDB();
+        } catch (IOException ex) {
+            Logger.getLogger(VeiculoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        conexaoDB.conectarBD();
+      
+        List<Reserva> reservas = new ArrayList<>();
+      
+        conexaoDB.preparedStatement = conexaoDB.conexao.prepareStatement("SELECT * FROM Koyota.reserva");
+        
+        conexaoDB.resultSet = conexaoDB.preparedStatement.executeQuery();
+        
+        while (conexaoDB.resultSet.next()) {
+            Reserva reserva = new Reserva();
+            
+            reserva.setCliente(new Cliente());
+            reserva.setVeiculo(new Veiculo());
+            
+            reserva.setId(conexaoDB.resultSet.getInt("pk_reserva"));
+            
+            reserva.getCliente().setId(conexaoDB.resultSet.getInt("fk_cliente"));
+            reserva.getVeiculo().setId(conexaoDB.resultSet.getInt("fk_veiculo"));
+
+            reserva.setDataHoraInicio(new DateTime( conexaoDB.resultSet.getDate("data_hora_incio" )));
+            reserva.setDataHoraTermino(new DateTime(conexaoDB.resultSet.getDate("data_hora_termino")));
+
+            reserva.setValorPrevisto(conexaoDB.resultSet.getFloat("valor_previsto"));
+            
+            reservas.add(reserva);
+        }
+        
+        return reservas;
+        
     }
 
     @Override
     public void delete(Reserva reserva) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Reserva findById(int idReserva) throws SQLException {
+        
+        try {
+            this.conexaoDB = new ConexaoDB();
+        } catch (IOException ex) {
+            Logger.getLogger(VeiculoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        conexaoDB.conectarBD();
+        
+        conexaoDB.preparedStatement = conexaoDB.conexao.prepareStatement("SELECT * FROM Koyota.reserva where pk_reserva = ?");
+        conexaoDB.preparedStatement.setInt(1, idReserva);
+        
+        conexaoDB.resultSet = conexaoDB.preparedStatement.executeQuery();
+        
+        Reserva reserva = null;
+        
+        while (conexaoDB.resultSet.next()) {
+            reserva = new Reserva();
+            
+            reserva.setCliente(new Cliente());
+            reserva.setVeiculo(new Veiculo());
+            
+            reserva.setId(conexaoDB.resultSet.getInt("pk_reserva"));
+            
+            reserva.getCliente().setId(conexaoDB.resultSet.getInt("fk_cliente"));
+            reserva.getVeiculo().setId(conexaoDB.resultSet.getInt("fk_veiculo"));
+
+            reserva.setDataHoraInicio(new DateTime(conexaoDB.resultSet.getDate("data_hora_incio")));
+            reserva.setDataHoraTermino(new DateTime(conexaoDB.resultSet.getDate("data_hora_termino")));
+
+            reserva.setValorPrevisto(conexaoDB.resultSet.getFloat("valor_previsto"));
+            
+        }
+        
+        return reserva;
+        
     }
  
 }

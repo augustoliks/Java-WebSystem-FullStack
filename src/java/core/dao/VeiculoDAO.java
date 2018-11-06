@@ -37,14 +37,14 @@ public class VeiculoDAO implements VeiculoDAOCaracteristicas {
 
         conexaoDB.preparedStatement = conexaoDB.conexao.prepareStatement(""
                 + "INSERT INTO VEICULO ("
-                + " modelo, " // 1
-                + " ano, " // 2
-                + " fabricante, " // 3
-                + " combustivel, " // 4
-                + " kilometragem, " // 5
-                + " estado_consearvacao, "// 6
-                + " cor," // 7
-                + " fk_categoria) " // 8
+                    + " modelo, " // 1
+                    + " ano, " // 2
+                    + " fabricante, " // 3
+                    + " combustivel, " // 4
+                    + " kilometragem, " // 5
+                    + " estado_consearvacao, "// 6
+                    + " cor," // 7
+                    + " fk_categoria) " // 8
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
 
         conexaoDB.preparedStatement.setString(1, veiculo.getModelo());
@@ -106,6 +106,12 @@ public class VeiculoDAO implements VeiculoDAOCaracteristicas {
     @Override
     public Veiculo findById(int idVeiculo) throws SQLException {
 
+        try {
+            this.conexaoDB = new ConexaoDB();
+        } catch (IOException ex) {
+            Logger.getLogger(VeiculoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         conexaoDB.conectarBD();
         Veiculo veiculo;
 
@@ -138,6 +144,13 @@ public class VeiculoDAO implements VeiculoDAOCaracteristicas {
     @Override
     public List findAll() throws SQLException {
 
+                try {
+            this.conexaoDB = new ConexaoDB();
+        } catch (IOException ex) {
+            Logger.getLogger(VeiculoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
         conexaoDB.conectarBD();
         Veiculo veiculo;
 
