@@ -26,8 +26,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author visita
  */
-@WebServlet(name = "GerarContrato", urlPatterns = {"/GerarContrato"})
-public class GerarContrato extends HttpServlet {
+@WebServlet(name = "AbrirContrato", urlPatterns = {"/AbrirContrato"})
+public class AbrirContrato extends HttpServlet {
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -57,8 +57,9 @@ public class GerarContrato extends HttpServlet {
         contrato.setOperador(new Operador());
         contrato.getOperador().setId(idOperador);
         
+        
         contrato.setValorPagoAntecipadamente(valorPagoAntecipadamente);
-                
+        
         contratoImpl.abrirContrato(contrato);
     }
 }

@@ -12,5 +12,5 @@ import api.model.Reserva;
  * @author visita
  */
 public interface ReservarVeiculosCaracacteristicas {
-    public boolean cadastroVeiculo(Reserva reserva);
+    public boolean reservar(Reserva reserva);
 }

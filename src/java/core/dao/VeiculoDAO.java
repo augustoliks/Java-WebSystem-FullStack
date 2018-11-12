@@ -124,6 +124,7 @@ public class VeiculoDAO implements VeiculoDAOCaracteristicas {
         conexaoDB.resultSet = conexaoDB.preparedStatement.executeQuery();
 
         veiculo = new Veiculo();
+        veiculo.setCategoria(new Categoria());
 
         while (conexaoDB.resultSet.next()) {
             veiculo.setAno(conexaoDB.resultSet.getInt("ano"));
@@ -132,6 +133,7 @@ public class VeiculoDAO implements VeiculoDAOCaracteristicas {
             veiculo.setEstadoConservervacao(conexaoDB.resultSet.getInt("estado_consearvacao"));
             veiculo.setFabricante(conexaoDB.resultSet.getString("fabricante"));
             veiculo.setId(conexaoDB.resultSet.getInt("pk_veiculo"));
+            veiculo.getCategoria().setId(conexaoDB.resultSet.getInt("fk_categoria"));
             veiculo.setKilometragem(conexaoDB.resultSet.getInt("kilometragem"));
             veiculo.setModelo(conexaoDB.resultSet.getString("modelo"));
         }

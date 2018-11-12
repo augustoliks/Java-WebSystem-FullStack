@@ -38,22 +38,24 @@ public class ReservarVeiculo extends HttpServlet {
 
         reservarVeiculosImpl = new ReservarVeiculoServico();
         Reserva reserva = new Reserva();
+        
         DateFormat f = DateFormat.getDateInstance();
 
         String dataHoraInicio = request.getParameter("date_ini");
         String dataHoraFim = request.getParameter("date_fim");
-        float valorPrevisto = Float.valueOf(request.getParameter("valor_pre"));
+     
         int idVeiculo = Integer.valueOf(request.getParameter("id_veiculo"));
         int idCliente = Integer.valueOf(request.getParameter("id_cliente"));
 
-        DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy");
 
         DateTime dataHoraInicoFormatada = formatter.parseDateTime(dataHoraInicio);
-        DateTime dataHoraFimFormatada = formatter.parseDateTime(dataHoraInicio);
+        DateTime dataHoraFimFormatada = formatter.parseDateTime(dataHoraFim);
 
         reserva.setDataHoraInicio(dataHoraInicoFormatada);
         reserva.setDataHoraTermino(dataHoraFimFormatada);
-        reserva.setValorPrevisto(valorPrevisto);
+
+        reserva.setValorPrevisto(0);
 
         reserva.setCliente(new Cliente());
         reserva.setVeiculo(new Veiculo());
@@ -61,7 +63,7 @@ public class ReservarVeiculo extends HttpServlet {
         reserva.getCliente().setId(idCliente);
         reserva.getVeiculo().setId(idVeiculo);
 
-        boolean statusCadastro = reservarVeiculosImpl.cadastroVeiculo(reserva);
+        boolean statusCadastro = reservarVeiculosImpl.reservar(reserva);
         /*
         if (statusCadastro){
             request.setAttribute("statusCadastro", statusCadastro);

@@ -15,12 +15,14 @@ import api.model.Operador;
 import api.model.Reserva;
 import api.model.Veiculo;
 import api.servico.ContratoCaracteristicas;
-import controller.GerarContrato;
+import controller.AbrirContrato;
 import core.dao.CategoriaDAO;
 import core.dao.ContratoDAO;
 import core.dao.ReservaDAO;
 import core.dao.VeiculoDAO;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 
@@ -54,6 +56,7 @@ public class ContratoServico implements ContratoCaracteristicas{
             
             reservaDB = reservaDAOImpl.findById(contrato.getReserva().getId());
             veiculoDB = veiculoDAOImpl.findById(reservaDB.getVeiculo().getId());
+           
             categoriaDB = categoriaDAOImpl.findById(veiculoDB.getCategoria().getId());
             
             contrato.setReserva(reservaDB);
@@ -63,11 +66,9 @@ public class ContratoServico implements ContratoCaracteristicas{
             contrato.setReserva(reservaDB);
             
             contrato.setDataHoraRetirada(contrato.getReserva().getDataHoraInicio());
-            
-            contrato.getValorTotalReserva();
+            contrato.setDataHoraDevolucao(null);
             
             contratoDAOImpl.insert(contrato);
-            
             status = true;
         }
         catch (SQLException e){           
@@ -80,7 +81,7 @@ public class ContratoServico implements ContratoCaracteristicas{
     }
 
     @Override
-    public boolean fecharContrato(Contrato contrato, DateTime dataDevulacao, String descricao) throws SQLException {
+    public boolean fecharContrato(Contrato contrato){
         
         ReservaDAOCaracteristicas reservaDAOImpl;
         ContratoDAOCaracteristicas contratoDAOImpl;
@@ -91,22 +92,38 @@ public class ContratoServico implements ContratoCaracteristicas{
         Contrato contratoDB = new Contrato();
         Reserva reservaDB = new Reserva();
         
-        contratoDB = contratoDAOImpl.findById(contrato.getId());
-        reservaDB = reservaDAOImpl.findById(contrato.getReserva().getId());
-        
-        contrato.setReserva(reservaDB);        
-        contrato.setDataHoraDevolucao(dataDevulacao);
-        contrato.setDescricaoAcrescimo(descricao);
-        
-        int dias = Days.daysBetween(contrato.getReserva().getDataHoraTermino(), contrato.getDataHoraDevolucao()).getDays();
-        
-        if(dias > 0){
-            contrato.setValorAcrescimo(dias * 500);
+        try {
+            
+            contratoDB = contratoDAOImpl.findById(contrato.getId());
+            reservaDB = reservaDAOImpl.findById(contratoDB.getReserva().getId());
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ContratoServico.class.getName()).log(Level.SEVERE, null, ex);
         }
-               
-        contratoDAOImpl.update(contrato);
+        
+        contratoDB.setDataHoraDevolucao(contrato.getDataHoraDevolucao());
+        contratoDB.setDescricaoAcrescimo(contrato.getDescricaoAcrescimo());
+        contratoDB.setReserva(reservaDB);
+        
+        int diasAcrescimo = Days.daysBetween(contratoDB.getReserva().getDataHoraTermino(), contratoDB.getDataHoraDevolucao()).getDays();
+        
+        if(diasAcrescimo > 0){
+            contratoDB.setValorAcrescimo(diasAcrescimo * 500);
+        }
 
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        contratoDB.setValorTotalReserva(
+                contratoDB.getValorAcrescimo() + 
+                contratoDB.getReserva().getValorPrevisto()
+        );
+        
+        try {
+            contratoDAOImpl.update(contratoDB);
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+            Logger.getLogger(ContratoServico.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return true;
+
     }
-    
 }

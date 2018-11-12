@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public interface ContratoDAOCaracteristicas {
 
     public void insert(Contrato contrato) throws SQLException;
-    public Contrato findById(int idCategoria) throws SQLException;
+    public Contrato findById(int idContrato) throws SQLException;
     public void update(Contrato contrato) throws SQLException;
     
 

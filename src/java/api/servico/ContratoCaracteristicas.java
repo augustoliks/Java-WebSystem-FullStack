@@ -6,7 +6,7 @@
 package api.servico;
 
 import api.model.Contrato;
-import controller.GerarContrato;
+import controller.AbrirContrato;
 import java.sql.SQLException;
 import org.joda.time.DateTime;
 
@@ -17,6 +17,6 @@ import org.joda.time.DateTime;
 public interface ContratoCaracteristicas {
 
     public boolean abrirContrato(Contrato contrato);
-    public boolean fecharContrato(Contrato contrato, DateTime dataDevulacao, String descricao) throws SQLException;
+    public boolean fecharContrato(Contrato contrato);
     
 }

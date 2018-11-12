@@ -73,11 +73,7 @@ public class Contrato extends Identificador{
      * @return the valorTotalReserva
      */
     public float getValorTotalReserva() {
-        
-        float dias = Float.valueOf(Days.daysBetween(this.dataHoraRetirada, this.dataHoraRetirada).getDays());
 
-        float valor = dias * this.getReserva().getVeiculo().getCategoria().getValor();
-        
         return valorTotalReserva;
     }
 
@@ -143,5 +139,4 @@ public class Contrato extends Identificador{
     public void setOperador(Operador operador) {
         this.operador = operador;
     }
-  
 }
