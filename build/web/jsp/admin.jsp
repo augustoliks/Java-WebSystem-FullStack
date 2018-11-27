@@ -67,6 +67,14 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#inserir_veiculo" data-toggle="tab">Inserir Veiculos</a>
                 </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="#veiculos_reservados" data-toggle="tab">Veiculos Reservados</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="#veiculos_disponiveis" data-toggle="tab">Veiculos Disponívies</a>
+                </li>
             </ul>
             
             <div class="tab-content">
@@ -80,118 +88,6 @@
                             <div class="col-sm-7">
                                 <input type="text" class="form-control" id="" placeholder="">
                             </div>
-
-                            
-<!--                            <label for="" class="col-sm-3">Dados do Cliente</label>
-                            <label for="" class="col-sm-2">Nome:</label>
-                            
-                            <div class="col-sm-7">
-                                <input type="text" class="form-control" id="" placeholder="">
-                            </div>
-
-
-                            <label for="" class="col-sm-3"> </label>
-                            <label for="" class="col-sm-2">Sobrenome:</label>
-                            
-                            <div class="col-sm-7 mt-2">
-                                <input type="text" class="form-control" id="" placeholder="">
-                            </div>
-
-                            <label for="" class="col-sm-3"> </label>
-                            <label for="" class="col-sm-2">CPF:</label>
-                            
-                            <div class="col-sm-7 mt-2">
-                                <input type="text" class="form-control" id="" placeholder="">
-                            </div>
-
-                            <label for="" class="col-sm-3"> </label>
-                            <label for="" class="col-sm-2">Endereço:</label>
-                            
-                            <div class="col-sm-7 mt-2">
-                                <input type="text" class="form-control" id="" placeholder="">
-                            </div>
-
-                            <label for="" class="col-sm-3"> </label>
-                            <label for="" class="col-sm-2">Código de Registro:</label>
-                            
-                            <div class="col-sm-7 mt-2">
-                                <input type="text" class="form-control" id="" placeholder="">
-                            </div>
-                            
-                            <div class="col-sm-12">
-                                <hr>
-                            </div>-->
-                            
-                            <!--DADOS DO CARRO-->
-<!--                            <label for="" class="col-sm-3">Dados do Carro</label>
-                            <label for="" class="col-sm-2">Categoria:</label>
-
-                            <div class="col-sm-7">
-                                <select class="form-control">
-                                    <option>Popular</option>
-                                    <option>Esportivo</option>
-                                    <option>Luxo</option>
-                                </select>
-                            </div>
-
-                            <label for="" class="col-sm-3"> </label>
-                            <label for="" class="col-sm-2 mt-2">Ano:</label>
-
-                            <div class="col-sm-7 mt-2">
-                                <input type="text" class="form-control" id="" placeholder="">
-                            </div>
-
-                            <label for="" class="col-sm-3"> </label>
-                            <label for="" class="col-sm-2 mt-2">Placa:</label>
-
-                            <div class="col-sm-7 mt-2">
-                                <input type="text" class="form-control" id="" placeholder="">
-                            </div>
-
-                            <label for="" class="col-sm-3"> </label>
-                            <label for="" class="col-sm-2 mt-2">Modelo:</label>
-
-                            <div class="col-sm-7 mt-2">
-                                <input type="text" class="form-control" id="" placeholder="">
-                            </div>
-
-                            <label for="" class="col-sm-3"> </label>
-                            <label for="" class="col-sm-2 mt-2">Fabricante:</label>
-
-                            <div class="col-sm-7 mt-2">
-                                <input type="text" class="form-control" id="" placeholder="">
-                            </div>
-
-                            <label for="" class="col-sm-3"> </label>
-                            <label for="" class="col-sm-2 mt-2">Cor:</label>
-
-                            <div class="col-sm-7 mt-2">
-                                <input type="text" class="form-control" id="" placeholder="">
-                            </div>
-                            
-                            <label for="" class="col-sm-3"> </label>
-                            <label for="" class="col-sm-2 mt-2">Quilometragem:</label>
-
-                            <div class="col-sm-7 mt-2">
-                                <input type="text" class="form-control" id="" placeholder="">
-                            </div>
-                            
-                            <label for="" class="col-sm-3"></label>
-                            <label for="" class="col-sm-3 mt-2">Estado de Conservação:</label>
-
-                            <div class="col-sm-6 mt-2">
-                                <input type="text" class="form-control" id="" placeholder="">
-                            </div>
-                            
-                            
-                            
-                            <label for="" class="col-sm-3"> </label>
-                            <label for="" class="col-sm-3 mt-2">Tanque de Combustivel:</label>
-
-                            <div class="col-sm-6 mt-2">
-                                <input type="text" class="form-control" id="" placeholder="">
-                            </div>-->
-                            
                             
                             <div class="col-sm-12">
                                 <hr>
@@ -240,12 +136,6 @@
                     <!-- RESERVA -->
                     <form>
                         <div class="form-group row">
-<!--                            
-                            <label for="" class="col-sm-4 col-form-label">Código de Reserva</label>
-                            
-                            <div class="col-sm-8 mb-2">
-                                <input type="text" class="form-control" id="" placeholder="">
-                            </div>-->
 
                             <label for="" class="col-sm-3">Dados do Usuário:</label>
                             <label for="" class="col-sm-2 mt-2">Nome:</label>
@@ -441,6 +331,12 @@
                             </div>
                         </div>
                     </form>
+                </div>
+                <div class="tab-pane" id="veiculos_reservados">
+                    <h1>  VEICULOS RESERVADOS - VAI RECEBER JSON DO BACK</h1>
+                </div>
+                <div class="tab-pane" id="veiculos_disponiveis">
+                    <h1>  VEICULOS DISPONIVEIS - VAI RECEBER JSON DO BACK</h1>
                 </div>
             </div>
         </div>

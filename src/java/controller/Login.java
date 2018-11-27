@@ -18,6 +18,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 
 /**
  *
@@ -45,9 +47,16 @@ public class Login extends HttpServlet {
         Pessoa pessoaBD = loginServico.findByNomeUsuario(nomeUsuario);
 
         if (pessoaBD != null && pessoaBD.getSenha().equals(senhaUsuario)) {
-
+               
+            //CRIANDO SESSION 
+            HttpSession session = request.getSession();
+            session.setAttribute("Rg", pessoaBD.getId());
+            
             if (pessoaBD instanceof Cliente) {
+                
+                request.setAttribute("nome", pessoaBD.getNome());
                 sc.getRequestDispatcher("/jsp/user.jsp").forward(request, response);
+                
             } else if (pessoaBD instanceof Operador) {
                 sc.getRequestDispatcher("/jsp/admin.jsp").forward(request, response);
             }

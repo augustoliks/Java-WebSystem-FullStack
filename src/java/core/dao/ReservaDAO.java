@@ -78,7 +78,7 @@ public class ReservaDAO implements ReservaDAOCaracteristicas{
       
         List<Reserva> reservas = new ArrayList<>();
       
-        conexaoDB.preparedStatement = conexaoDB.conexao.prepareStatement("SELECT * FROM Koyota.reserva");
+        conexaoDB.preparedStatement = conexaoDB.conexao.prepareStatement("SELECT * FROM Koyota.RESERVA");
         
         conexaoDB.resultSet = conexaoDB.preparedStatement.executeQuery();
         
@@ -121,7 +121,7 @@ public class ReservaDAO implements ReservaDAOCaracteristicas{
         
         conexaoDB.conectarBD();
         
-        conexaoDB.preparedStatement = conexaoDB.conexao.prepareStatement("SELECT * FROM Koyota.reserva where pk_reserva = ?");
+        conexaoDB.preparedStatement = conexaoDB.conexao.prepareStatement("SELECT * FROM Koyota.RESERVA where pk_reserva = ?");
         conexaoDB.preparedStatement.setInt(1, idReserva);
         
         conexaoDB.resultSet = conexaoDB.preparedStatement.executeQuery();

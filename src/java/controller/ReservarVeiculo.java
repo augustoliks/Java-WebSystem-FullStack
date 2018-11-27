@@ -11,6 +11,7 @@ import api.model.Veiculo;
 import api.servico.ReservarVeiculosCaracacteristicas;
 import core.servico.ReservarVeiculoServico;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.ParseException;
 import org.joda.time.format.DateTimeFormatter;
@@ -20,6 +21,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 
@@ -35,35 +37,53 @@ public class ReservarVeiculo extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        reservarVeiculosImpl = new ReservarVeiculoServico();
-        Reserva reserva = new Reserva();
         
-        DateFormat f = DateFormat.getDateInstance();
+        
+        PrintWriter out = response.getWriter();
+        String Rg = null;
+        // PEGANDO RG DO CLIENTE PELA SESSION        
+        HttpSession session = request.getSession(false);
+        
+        if(session != null && session.getAttribute("Rg") != null){
+            Rg = String.valueOf(session.getAttribute("Rg"));
+            
+            reservarVeiculosImpl    = new ReservarVeiculoServico();
+            Reserva reserva         = new Reserva();
 
-        String dataHoraInicio = request.getParameter("date_ini");
-        String dataHoraFim = request.getParameter("date_fim");
-     
-        int idVeiculo = Integer.valueOf(request.getParameter("id_veiculo"));
-        int idCliente = Integer.valueOf(request.getParameter("id_cliente"));
+            DateFormat f            = DateFormat.getDateInstance();
 
-        DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy");
+            String dataHoraInicio   = request.getParameter("date_ini");
+            String dataHoraFim      = request.getParameter("date_fim");
 
-        DateTime dataHoraInicoFormatada = formatter.parseDateTime(dataHoraInicio);
-        DateTime dataHoraFimFormatada = formatter.parseDateTime(dataHoraFim);
+            int idVeiculo           = Integer.valueOf(request.getParameter("id_veiculo"));
+            int idCliente           = Integer.valueOf(request.getParameter("id_cliente"));
 
-        reserva.setDataHoraInicio(dataHoraInicoFormatada);
-        reserva.setDataHoraTermino(dataHoraFimFormatada);
+            DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy");
 
-        reserva.setValorPrevisto(0);
+            DateTime dataHoraInicoFormatada = formatter.parseDateTime(dataHoraInicio);
+            DateTime dataHoraFimFormatada = formatter.parseDateTime(dataHoraFim);
 
-        reserva.setCliente(new Cliente());
-        reserva.setVeiculo(new Veiculo());
+            reserva.setDataHoraInicio(dataHoraInicoFormatada);
+            reserva.setDataHoraTermino(dataHoraFimFormatada);
 
-        reserva.getCliente().setId(idCliente);
-        reserva.getVeiculo().setId(idVeiculo);
+            reserva.setValorPrevisto(0);
 
-        boolean statusCadastro = reservarVeiculosImpl.reservar(reserva);
+            reserva.setCliente(new Cliente());
+            reserva.setVeiculo(new Veiculo());
+
+            reserva.getCliente().setId(idCliente);
+            reserva.getVeiculo().setId(idVeiculo);
+
+            boolean statusCadastro = reservarVeiculosImpl.reservar(reserva);
+            
+        }else{
+            out.print("Voce deve estar logado para reservar um veiculo!");
+            
+            request.getRequestDispatcher("/jsp/index.jsp").forward(request, response);
+            
+            out.close();
+            System.out.println("rg da session ============ " + Rg);
+        }
         /*
         if (statusCadastro){
             request.setAttribute("statusCadastro", statusCadastro);
