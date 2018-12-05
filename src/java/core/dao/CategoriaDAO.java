@@ -85,6 +85,12 @@ public class CategoriaDAO implements CategoriaDAOCaracteristicas{
         Categoria categoria;
         List<Categoria> categorias = new ArrayList<>();
         
+        try {
+            conexaoDB = new ConexaoDB();
+        } catch (IOException ex) {
+            Logger.getLogger(CategoriaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         conexaoDB.conectarBD();
         conexaoDB.preparedStatement = conexaoDB.conexao.prepareStatement("SELECT * FROM Koyota.CATEGORIA");
         conexaoDB.resultSet = conexaoDB.preparedStatement.executeQuery();

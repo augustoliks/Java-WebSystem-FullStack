@@ -42,22 +42,29 @@ public class CadastroCliente extends HttpServlet {
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
         
-        novoCliente.setCpf(cpf);
-        novoCliente.setEmail(email);
-        novoCliente.setEndereco(endereco);
-        novoCliente.setNome(nome);
-        novoCliente.setRg(rg);
-        novoCliente.setSenha(senha);
-        
-        boolean statusCadastro = cadastroClienteImpl.insersao(novoCliente);
-
-        if (statusCadastro){
-            request.setAttribute("statusCadastro", statusCadastro);
+        if(nome.equals("") || rg.equals("") || cpf.equals("") || endereco.equals("") || email.equals("") || senha.equals("")){
+            request.setAttribute("erroForm", true);
+            sc.getRequestDispatcher("/jsp/index.jsp").forward(request, response);
         }
         else{
-            request.setAttribute("statusCadastro", statusCadastro);
-            System.out.println("ERRO DE CADASTRO");
-        }
         
+            novoCliente.setCpf(cpf);
+            novoCliente.setEmail(email);
+            novoCliente.setEndereco(endereco);
+            novoCliente.setNome(nome);
+            novoCliente.setRg(rg);
+            novoCliente.setSenha(senha);
+
+            boolean statusCadastro = cadastroClienteImpl.insersao(novoCliente);
+
+            if (statusCadastro){
+                request.setAttribute("statusCadastro", statusCadastro);
+                sc.getRequestDispatcher("/jsp/index.jsp").forward(request, response);
+            }
+            else{
+                request.setAttribute("statusCadastro", statusCadastro);
+                sc.getRequestDispatcher("/jsp/index.jsp").forward(request, response);
+            }
+        }
     }
 }

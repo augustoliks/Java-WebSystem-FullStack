@@ -56,7 +56,10 @@ public class VeiculoDAO implements VeiculoDAOCaracteristicas {
         conexaoDB.preparedStatement.setString(7, veiculo.getCor());
 
         conexaoDB.preparedStatement.setInt(8, veiculo.getCategoria().getId());
-
+        
+        
+        System.out.println("QUERY PRA RODARAAAAAAAAAAAAAAAAAAAAAAAAAAAA" + conexaoDB.preparedStatement);
+        
         conexaoDB.preparedStatement.executeQuery();
 
         conexaoDB.fecharConexao();

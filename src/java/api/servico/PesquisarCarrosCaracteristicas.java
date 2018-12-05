@@ -14,5 +14,7 @@ import java.util.List;
 public interface PesquisarCarrosCaracteristicas {
     
     public String pesquisarCarros(String categoria);
+    public String carrosNaoDisponiveis();
+    public String carrosDisponiveis();
     
 }

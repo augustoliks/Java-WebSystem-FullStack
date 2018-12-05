@@ -11,13 +11,18 @@ import api.model.Veiculo;
 import api.servico.ReservarVeiculosCaracacteristicas;
 import core.servico.ReservarVeiculoServico;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DateFormat;
+import java.text.ParseException;
 import org.joda.time.format.DateTimeFormatter;
+import java.util.Date;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 
@@ -29,39 +34,77 @@ import org.joda.time.format.DateTimeFormat;
 public class ReservarVeiculo extends HttpServlet {
 
     ReservarVeiculosCaracacteristicas reservarVeiculosImpl;
+    
+    public DateTime converterData(String dataPadraoUSA){
+           
+        DateTimeFormatter formatterInput = DateTimeFormat.forPattern("yyyy-MM-dd");
+        
+        DateTime dataUSA = formatterInput.parseDateTime(dataPadraoUSA);
+        String dataQuebrada[] = dataPadraoUSA.split("-");
+        
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy");
+        DateTime dataFormatada = formatter.parseDateTime(dataQuebrada[2]+"/"+dataQuebrada[1]+"/"+dataQuebrada[0]);
+        
+        return dataFormatada;
+    }
+    
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        reservarVeiculosImpl = new ReservarVeiculoServico();
-        Reserva reserva = new Reserva();
         
-        DateFormat f = DateFormat.getDateInstance();
+        ServletContext sc = request.getServletContext();
+        PrintWriter out = response.getWriter();
+        String Rg = null;
+        // PEGANDO RG DO CLIENTE PELA SESSION        
+        HttpSession session = request.getSession(false);
+        
+        if(session != null && session.getAttribute("Rg") != null){
+            Rg = String.valueOf(session.getAttribute("Rg"));
+            
+            int idVeiculo                              = Integer.valueOf(request.getParameter("id_veiculo"));
+            int idCliente                              = Integer.valueOf(Rg);
+            
+            reservarVeiculosImpl                       = new ReservarVeiculoServico();
+            Reserva reserva                            = new Reserva();
 
-        String dataHoraInicio = request.getParameter("date_ini");
-        String dataHoraFim = request.getParameter("date_fim");
-     
-        int idVeiculo = Integer.valueOf(request.getParameter("id_veiculo"));
-        int idCliente = Integer.valueOf(request.getParameter("id_cliente"));
+            DateFormat f                               = DateFormat.getDateInstance();
 
-        DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy");
+            String dataHoraInicio                      = request.getParameter("date_ini");
+            String dataHoraFim                         = request.getParameter("date_fim");
 
-        DateTime dataHoraInicoFormatada = formatter.parseDateTime(dataHoraInicio);
-        DateTime dataHoraFimFormatada = formatter.parseDateTime(dataHoraFim);
+            DateTime dataHoraInicoFormatada            = converterData(dataHoraInicio);
+            DateTime dataHoraFimFormatada              = converterData(dataHoraFim);
 
-        reserva.setDataHoraInicio(dataHoraInicoFormatada);
-        reserva.setDataHoraTermino(dataHoraFimFormatada);
+            reserva.setDataHoraInicio(dataHoraInicoFormatada);
+            reserva.setDataHoraTermino(dataHoraFimFormatada);
 
-        reserva.setValorPrevisto(0);
+            reserva.setValorPrevisto(0);
 
-        reserva.setCliente(new Cliente());
-        reserva.setVeiculo(new Veiculo());
+            reserva.setCliente(new Cliente());
+            reserva.setVeiculo(new Veiculo());
 
-        reserva.getCliente().setId(idCliente);
-        reserva.getVeiculo().setId(idVeiculo);
+            reserva.getCliente().setId(idCliente);
+            reserva.getVeiculo().setId(idVeiculo);
 
-        boolean statusCadastro = reservarVeiculosImpl.reservar(reserva);
+            boolean statusCadastro = reservarVeiculosImpl.reservar(reserva);
+            
+            if(statusCadastro){
+                try {
+                    sc.getRequestDispatcher("/jsp/user.jsp").forward(request, response);
+                }catch(Exception e){ 
+                    System.out.println("erro" + e);
+                }
+            }
+            
+        }else{
+            out.print("Voce deve estar logado para reservar um veiculo!");
+            
+            request.getRequestDispatcher("/jsp/index.jsp").forward(request, response);
+            
+            out.close();
+            System.out.println("rg da session ============ " + Rg);
+        }
         /*
         if (statusCadastro){
             request.setAttribute("statusCadastro", statusCadastro);

@@ -21,6 +21,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 
 /**
  *
@@ -37,7 +39,8 @@ public class AbrirContrato extends HttpServlet {
         contratoImpl = new ContratoServico();
         
         Contrato contrato = new Contrato();
-        
+        String Rg = null;
+
         try {
             request.setCharacterEncoding("UTF-8");
         } catch (Exception e) {
@@ -45,21 +48,46 @@ public class AbrirContrato extends HttpServlet {
         }
 
         ServletContext sc = request.getServletContext();
+           
+        HttpSession session = request.getSession(false);
+        if(session != null && session.getAttribute("Rg") != null){
+            Rg = String.valueOf(session.getAttribute("Rg"));
 
-        int idReserva = Integer.valueOf(request.getParameter("id_reserva"));
-        int idOperador = Integer.valueOf(request.getParameter("id_operador"));
-       
-        float valorPagoAntecipadamente = Float.valueOf(request.getParameter("valor_pag_ant"));
-       
-        contrato.setReserva(new Reserva());
-        contrato.getReserva().setId(idReserva);
-        
-        contrato.setOperador(new Operador());
-        contrato.getOperador().setId(idOperador);
-        
-        
-        contrato.setValorPagoAntecipadamente(valorPagoAntecipadamente);
-        
-        contratoImpl.abrirContrato(contrato);
+            int idReserva = Integer.valueOf(request.getParameter("id_reserva"));
+            int idOperador = Integer.valueOf(Rg);
+
+            float valorPagoAntecipadamente = Float.valueOf(request.getParameter("valor_pag_ant"));
+
+            contrato.setReserva(new Reserva());
+            contrato.getReserva().setId(idReserva);
+
+            contrato.setOperador(new Operador());
+            contrato.getOperador().setId(idOperador);
+
+
+            contrato.setValorPagoAntecipadamente(valorPagoAntecipadamente);
+
+            contratoImpl.abrirContrato(contrato);
+            
+            try {
+                request.setAttribute("status_abrir_contrato", 1);
+                sc.getRequestDispatcher("/jsp/admin.jsp").forward(request, response);
+            }catch(Exception e){ 
+                System.out.println("erro" + e);
+                request.setAttribute("status_abrir_contrato_err", 1);
+                sc.getRequestDispatcher("/jsp/admin.jsp").forward(request, response);
+            }
+            
+
+        }else{
+            
+            System.out.print("Voce deve estar logado para reservar um veiculo!");
+            
+            request.setAttribute("status_abrir_contrato_err", 1);
+            sc.getRequestDispatcher("/jsp/admin.jsp").forward(request, response);
+            
+            System.out.println("rg da session ============ " + Rg);
+            
+        }
     }
 }

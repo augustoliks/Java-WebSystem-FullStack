@@ -18,6 +18,7 @@ import java.sql.SQLException;
 import api.model.Veiculo;
 import com.google.gson.Gson;
 import core.dao.ReservaDAO;
+import java.util.ArrayList;
 
 
 
@@ -66,5 +67,78 @@ public class PesquisarCarrosServico implements PesquisarCarrosCaracteristicas{
        
         return jsonCarros;
     }
+
+    @Override
+    public String carrosNaoDisponiveis() {
+   
+        
+        veiculoDAOImpl = new VeiculoDAO();
+        categoriaDAOImpl = new CategoriaDAO();
+        reservaDAOImpl = new ReservaDAO();
+        
+        List<Veiculo> veiculos = null;
+        List<Reserva> reservas = null;
+        
+        try {
+            veiculos = veiculoDAOImpl.findAll();
+            reservas = reservaDAOImpl.findAll();
+        } catch (SQLException ex) {
+            System.out.println();
+            System.out.println(ex.toString());
+        }
+    
+     
+        List<Veiculo> veiculosNaoDisponiveis =  new ArrayList<>();
+        
+        for(Reserva reserva : reservas){
+            for(Veiculo veiculo : veiculos){
+                if (reserva.getVeiculo().getId() == veiculo.getId()){
+                    veiculosNaoDisponiveis.add(veiculo);
+                    break;
+                }
+            }
+        }
+        
+        String jsonCarros = new Gson().toJson(veiculosNaoDisponiveis);
        
+        return jsonCarros;
+        
+    }
+
+    @Override
+    public String carrosDisponiveis() {
+   
+        veiculoDAOImpl = new VeiculoDAO();
+        categoriaDAOImpl = new CategoriaDAO();
+        reservaDAOImpl = new ReservaDAO();
+        
+        List<Categoria> categorias = new ArrayList<>();
+        List<Veiculo> veiculos = new ArrayList<>();
+        List<Reserva> reservas = new ArrayList<>();
+        
+        try {
+            categorias = categoriaDAOImpl.findAll();
+            veiculos = veiculoDAOImpl.findAll();
+            reservas = reservaDAOImpl.findAll();
+            
+        } catch (SQLException ex) {
+            System.out.println();
+            System.out.println(ex.toString());
+        }
+    
+        for(Reserva reserva : reservas){
+            for(Veiculo veiculo : veiculos){
+                if (reserva.getVeiculo().getId() == veiculo.getId()){
+                    veiculos.remove(veiculo);
+                    break;
+                }
+            }
+            
+        }
+        
+        String jsonCarros = new Gson().toJson(veiculos);
+       
+        return jsonCarros;
+    }
+    
 }

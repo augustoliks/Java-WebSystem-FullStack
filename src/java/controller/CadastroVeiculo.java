@@ -51,7 +51,7 @@ public class CadastroVeiculo extends HttpServlet {
         String modelo = request.getParameter("modelo");
         String fabricante = request.getParameter("fabricante");
         String cor = request.getParameter("cor");
-        int kilometragem = Integer.valueOf(request.getParameter("kilometragem"));
+        int kilometragem = Integer.parseInt(request.getParameter("kilometragem"));
         int conservacao = Integer.valueOf(request.getParameter("conservacao"));
         String combustivel = request.getParameter("combustivel");
         String categoria = request.getParameter("categoria");
@@ -70,7 +70,14 @@ public class CadastroVeiculo extends HttpServlet {
 
         status = cadVeiculosServicoImpl.insercao(veiculo);
 
-        request.setAttribute("statusCadastro", status);
+        try {
+            request.setAttribute("status_cadastro_veiculo", 1);
+            sc.getRequestDispatcher("/jsp/admin.jsp").forward(request, response);
+        }catch(Exception e){ 
+            System.out.println("erro" + e);
+            request.setAttribute("status_cadastro_veiculo_err", 1);
+            sc.getRequestDispatcher("/jsp/admin.jsp").forward(request, response);
+        }
 
     }
 }

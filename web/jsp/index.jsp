@@ -8,6 +8,9 @@
 
         <!-- CSS -->
         <link rel="stylesheet" href="../static/css/home_style.css">
+        
+        <!-- AnimationsJS -->
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
         <!--Font Awesome-->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
@@ -27,7 +30,7 @@
             <i class="fas fa-search" style="margin-top:2px"></i>
         </div>
 
-        <img id="imagem_fundo" src="../static/images/koyata.png" class="center" style="margin-top:15%">
+        <img id="imagem_fundo" src="../static/images/koyata.png" class="center" style="margin-top:15%" data-aos="zoom-in">
 
         <div id="fundo1" hidden style="">
 
@@ -79,9 +82,8 @@
                 <div style="width: 95%;">
                     <button id="btnCadastro" class="btn center mt-5"> CADASTRAR</button>
                     <button id="btnLogin" class="btn center mt-1"> ENTRAR</button>
-
-
                 </div>
+                <span id="erroNoLogin" style="text-align: center; font-size: 10px; color: red"></span>
             </div>
         </div>
 
@@ -140,10 +142,30 @@
                 </form>
             </div>
         </div>
-
-
+        
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+      
         <script>
-
+            
+            window.onload = function(){
+                AOS.init();
+            }
+            
+            var cadastro = <%= request.getAttribute("statusCadastro")%>
+            if(<%= request.getAttribute("falhaAutenticacao")%>){
+                document.getElementById("erroNoLogin").innerHTML += "<h1>Usuário ou senha incorretos</h1>";
+            }
+            if(<%= request.getAttribute("erroForm")%>){
+                alert("Todos os campos devem ser preenchidos")
+            }
+            if(cadastro == false){
+                alert("Ocorreram erros no cadastro :(")
+            }
+            if(cadastro == true){
+                alert("Cadastro efetuado com sucesso!")
+            }
+            
+            
             // mudar fundo ao clicar nos li
             primeiroLi = document.getElementById('li1');
             img_fundo = document.getElementById('imagem_fundo');

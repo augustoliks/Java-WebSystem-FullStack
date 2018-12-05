@@ -9,6 +9,7 @@ import api.servico.PesquisarCarrosCaracteristicas;
 import core.servico.PesquisarCarrosServico;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,28 +20,21 @@ import javax.servlet.http.HttpServletResponse;
 public class PesquisarVeiculos extends HttpServlet {
     
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-            
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        ServletContext sc = request.getServletContext();
+
         String categoria = request.getParameter("categoria");
+
         
         PesquisarCarrosCaracteristicas pesquisarCarrosImpl;
         pesquisarCarrosImpl = new PesquisarCarrosServico();
-        
         String jsonListaCarros = pesquisarCarrosImpl.pesquisarCarros(categoria);
-            
-     try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet NewServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>" + jsonListaCarros + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }            
+
+        request.setAttribute("jsonListaCarros", jsonListaCarros);
+
+        sc.getRequestDispatcher("/jsp/user.jsp").forward(request, response);
+                
     }
 
 }
