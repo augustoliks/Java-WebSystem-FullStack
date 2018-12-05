@@ -38,7 +38,7 @@ public class ContratoDAO implements ContratoDAOCaracteristicas{
         conexaoDB.conectarBD();
 
         conexaoDB.preparedStatement = conexaoDB.conexao.prepareStatement(""
-                + "insert into contrato("
+                + "insert into CONTRATO("
                     + "fk_reserva,"
                     + "fk_operador,"
                     + "data_hora_retirada,"
