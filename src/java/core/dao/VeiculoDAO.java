@@ -185,4 +185,32 @@ public class VeiculoDAO implements VeiculoDAOCaracteristicas {
         return veiculos;
     }
 
+    @Override
+    public void update(Veiculo veiculo) throws SQLException {
+        
+        try {
+            this.conexaoDB = new ConexaoDB();
+        } catch (IOException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        conexaoDB.conectarBD();
+        conexaoDB.preparedStatement = conexaoDB.conexao.prepareStatement(""
+                + "UPDATE VEICULO SET "
+                    + "kilometragem = ?"
+                    + ", "
+                    + "estado_consearvacao = ?"
+                    + "WHERE pk_veiculo = ?"    
+                    + ";"
+        ); 
+
+        conexaoDB.preparedStatement.setInt(1, veiculo.getKilometragem());
+        conexaoDB.preparedStatement.setInt(2, veiculo.getEstadoConservervacao());
+        conexaoDB.preparedStatement.setInt(3, veiculo.getId());
+        
+        conexaoDB.preparedStatement.executeQuery();
+        
+        conexaoDB.fecharConexao();
+    }
+
 }

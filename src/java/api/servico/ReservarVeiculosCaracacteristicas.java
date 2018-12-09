@@ -13,4 +13,5 @@ import api.model.Reserva;
  */
 public interface ReservarVeiculosCaracacteristicas {
     public boolean reservar(Reserva reserva);
+    public boolean apagarRegistro(int idReserva);
 }

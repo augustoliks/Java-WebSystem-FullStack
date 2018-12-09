@@ -34,6 +34,8 @@ public class PesquisarVeiculosDisponiveis extends HttpServlet {
         request.setAttribute("jsonListaCarrosDisponiveis", jsonListaCarros);
 
         sc.getRequestDispatcher("/jsp/admin.jsp").forward(request, response);
+        
+        
 
     }
 }

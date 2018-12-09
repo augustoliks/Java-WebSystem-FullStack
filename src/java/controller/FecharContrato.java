@@ -45,21 +45,19 @@ public class FecharContrato extends HttpServlet {
         Contrato contrato = new Contrato();
         
         int idContrato = Integer.valueOf(request.getParameter("id_contrato"));
-
-        String descricao = request.getParameter("descricao");
+        int kilometragemPercorrida = Integer.valueOf(request.getParameter("kilometragem_percorrida"));
+        int estadoConservacao = Integer.valueOf(request.getParameter("estadoConservacao"));
+        
         String dataHoraDevolucao = request.getParameter("data_devolucao");
-
         DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy");
         
         DateTime dataHoraDevolucaoFormatada = formatter.parseDateTime(dataHoraDevolucao);        
 
         contrato.setDataHoraDevolucao(dataHoraDevolucaoFormatada);
         contrato.setId(idContrato);
-        contrato.setDescricaoAcrescimo(descricao);
         
-        boolean status = contratoImpl.fecharContrato(contrato);
-        
-        
+        boolean status = contratoImpl.fecharContrato(contrato, kilometragemPercorrida, estadoConservacao);
+               
     }
 
 }

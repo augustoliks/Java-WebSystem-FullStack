@@ -81,49 +81,82 @@ public class ContratoServico implements ContratoCaracteristicas{
     }
 
     @Override
-    public boolean fecharContrato(Contrato contrato){
+    public boolean fecharContrato(Contrato contrato, int kilometragemPercorrida, int estadoConservacao){
         
         ReservaDAOCaracteristicas reservaDAOImpl;
         ContratoDAOCaracteristicas contratoDAOImpl;
+        VeiculoDAOCaracteristicas veiculoDAOImpl;
         
         contratoDAOImpl = new ContratoDAO();
         reservaDAOImpl = new ReservaDAO();
+        veiculoDAOImpl = new VeiculoDAO();
         
         Contrato contratoDB = new Contrato();
         Reserva reservaDB = new Reserva();
+        Veiculo veiculoDB = new Veiculo();
+        
+        String descricaoAcrescimo = "";
+        
+        boolean statusOperacao = true;
+        
         
         try {
-            
             contratoDB = contratoDAOImpl.findById(contrato.getId());
             reservaDB = reservaDAOImpl.findById(contratoDB.getReserva().getId());
-            
+            veiculoDB = veiculoDAOImpl.findById(reservaDB.getVeiculo().getId());
         } catch (SQLException ex) {
             Logger.getLogger(ContratoServico.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        //Multa de KM percorrido
+        veiculoDB.setKilometragem(
+                veiculoDB.getKilometragem() +
+                kilometragemPercorrida
+        );
+        
+        float acrescimoKMPercorrido = (kilometragemPercorrida/100)*10;
+        descricaoAcrescimo += "\nKM percorrido: "+String.valueOf(kilometragemPercorrida);
+        descricaoAcrescimo += "\nAcrescimo: "+String.valueOf(acrescimoKMPercorrido);
+        
+        contratoDB.setValorAcrescimo(contratoDB.getValorAcrescimo()+acrescimoKMPercorrido);
+        
+        //Multa de KM Data excedida
         contratoDB.setDataHoraDevolucao(contrato.getDataHoraDevolucao());
         contratoDB.setDescricaoAcrescimo(contrato.getDescricaoAcrescimo());
         contratoDB.setReserva(reservaDB);
         
-        int diasAcrescimo = Days.daysBetween(contratoDB.getReserva().getDataHoraTermino(), contratoDB.getDataHoraDevolucao()).getDays();
-        
-        if(diasAcrescimo > 0){
-            contratoDB.setValorAcrescimo(diasAcrescimo * 500);
-        }
+        int diasAtraso = Days.daysBetween(contratoDB.getReserva().getDataHoraTermino(), contratoDB.getDataHoraDevolucao()).getDays();
 
-        contratoDB.setValorTotalReserva(
-                contratoDB.getValorAcrescimo() + 
-                contratoDB.getReserva().getValorPrevisto()
-        );
+        if(diasAtraso > 0){
+            float acrescimoAtrasoEntrega = diasAtraso * 100;
+            contratoDB.setValorAcrescimo(contratoDB.getValorAcrescimo()+acrescimoAtrasoEntrega);            
+            descricaoAcrescimo += "\nAtraso de : "+String.valueOf(diasAtraso)+" dias";
+            descricaoAcrescimo += "\nAcrescimo: "+String.valueOf(acrescimoAtrasoEntrega);
+        }
+        
+        //Multa estado conservacao
+        if(estadoConservacao > 0){
+            int estadoConservacaoAtual = veiculoDB.getEstadoConservervacao()-estadoConservacao;
+            float acrescimoEstadoConservacao = estadoConservacaoAtual * 50;
+            contratoDB.setValorAcrescimo(contratoDB.getValorAcrescimo()+acrescimoEstadoConservacao);            
+            descricaoAcrescimo += "\nO carro teve uma reducao de estado de conservacao de : "+String.valueOf(estadoConservacao)+" nivel";
+            descricaoAcrescimo += "\nAcrescimo: "+String.valueOf(acrescimoEstadoConservacao);
+            veiculoDB.setEstadoConservervacao(estadoConservacaoAtual);
+        }
+        
+        contratoDB.setDescricaoAcrescimo(descricaoAcrescimo);
         
         try {
             contratoDAOImpl.update(contratoDB);
+            veiculoDAOImpl.update(veiculoDB);
         } catch (SQLException ex) {
             System.out.println(ex.toString());
             Logger.getLogger(ContratoServico.class.getName()).log(Level.SEVERE, null, ex);
+            statusOperacao = false;
         }
         
-        return true;
+        return statusOperacao;
 
     }
+
 }

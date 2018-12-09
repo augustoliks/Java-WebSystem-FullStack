@@ -30,7 +30,7 @@ public class LeitorPropiedadesBancoDados {
 
     public String getUsuario() throws FileNotFoundException, IOException {
      //   return prop.getProperty("USUARIO");
-        return "gabrielk";
+        return "augustoliks";
     }
     
     public String getLinkConexao() throws FileNotFoundException, IOException {
@@ -40,7 +40,7 @@ public class LeitorPropiedadesBancoDados {
     
     public String getSenha() throws FileNotFoundException, IOException {
        // return prop.getProperty("SENHA");
-        return "amayok132";
+        return "root";
     }
 
     public String getEndereco() throws FileNotFoundException, IOException {

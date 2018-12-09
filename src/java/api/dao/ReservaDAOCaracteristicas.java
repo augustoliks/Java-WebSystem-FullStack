@@ -18,7 +18,7 @@ public interface ReservaDAOCaracteristicas {
     public void insert(Reserva reserva) throws SQLException;
     public void update(Reserva reserva) throws SQLException;
     public List findAll() throws SQLException;
-    public void delete(Reserva reserva) throws SQLException;
+    public void deleteById(int idReserva) throws SQLException;
     public Reserva findById(int idReserva)throws SQLException;
     
 }

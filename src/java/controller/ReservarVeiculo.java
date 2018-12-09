@@ -13,9 +13,8 @@ import core.servico.ReservarVeiculoServico;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
-import java.text.ParseException;
+
 import org.joda.time.format.DateTimeFormatter;
-import java.util.Date;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -55,6 +54,7 @@ public class ReservarVeiculo extends HttpServlet {
         
         ServletContext sc = request.getServletContext();
         PrintWriter out = response.getWriter();
+
         String Rg = null;
         // PEGANDO RG DO CLIENTE PELA SESSION        
         HttpSession session = request.getSession(false);

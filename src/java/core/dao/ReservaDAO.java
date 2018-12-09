@@ -63,7 +63,8 @@ public class ReservaDAO implements ReservaDAOCaracteristicas{
 
     @Override
     public void update(Reserva reserva) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+
     }
 
     @Override
@@ -106,11 +107,6 @@ public class ReservaDAO implements ReservaDAOCaracteristicas{
     }
 
     @Override
-    public void delete(Reserva reserva) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public Reserva findById(int idReserva) throws SQLException {
         
         try {
@@ -148,6 +144,26 @@ public class ReservaDAO implements ReservaDAOCaracteristicas{
         
         return reserva;
         
+    }
+
+    @Override
+    public void deleteById(int idReserva) throws SQLException {
+ 
+        // DELETE FROM RESERVA WHERE Koyota.RESERVA.pk_reserva = ?
+
+        try {
+            this.conexaoDB = new ConexaoDB();
+        } catch (IOException ex) {
+            Logger.getLogger(VeiculoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        conexaoDB.conectarBD();
+      
+        conexaoDB.preparedStatement = conexaoDB.conexao.prepareStatement("DELETE FROM Koyota.RESERVA WHERE pk_reserva = ?");
+        conexaoDB.preparedStatement.setInt(1, idReserva);
+        
+        conexaoDB.resultSet = conexaoDB.preparedStatement.executeQuery();
+   
     }
  
 }
