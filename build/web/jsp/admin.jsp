@@ -185,42 +185,36 @@
                 </div>
                 <div class="tab-pane" id="receber_veiculos">
                     <!-- RECEBER VEICULO -->
-                    <form>
+                    <form action="/FecharContrato" method="POST">
                         <div class="form-group row">
-                            <label for="" class="col-sm-4 col-form-label">Código de Reserva:</label>
+                            <label for="" class="col-sm-4 col-form-label">Código do Contrato:</label>
                             
                             <div class="col-sm-8 mb-2">
-                                <input type="text" class="form-control" id="" placeholder="">
+                                <input type="text" class="form-control" id="" placeholder="" name="id_contrato">
                             </div>
 
                             <label for="" class="col-sm-4 mt-2">Data de devolução:</label>
                             
                             <div class="col-sm-8 mt-2">
-                                <input type="text" class="form-control" id="" placeholder="">
+                                <input type="date" class="form-control" id="" placeholder="" name="data_devolucao">
                             </div>
 
                             <label for="" class="col-sm-4 mt-2">Conservação:</label>
                             
                             <div class="col-sm-8 mt-2">
-                                <input type="text" class="form-control" id="" placeholder="">
+                                <input type="text" class="form-control" id="" placeholder="" name="estadoConservacao">
                             </div>
 
                             <label for="" class="col-sm-4 mt-2">Kilometragem:</label>
                             
                             <div class="col-sm-8 mt-2">
-                                <input type="text" class="form-control" id="" placeholder="">
-                            </div>
-
-                            <label for="" class="col-sm-4 mt-2">Acréscimo $$:</label>
-                            
-                            <div class="col-sm-8 mt-2">
-                                <input type="text" class="form-control" id="" placeholder="">
+                                <input type="text" class="form-control" id="" placeholder="" name="kilometragem_percorrida">
                             </div>
 
                         </div>
 
-                        <button class="btn btn-muted" >Procurar</button>
-                        <button class="btn btn-muted" >Gerar</button>
+                        
+                        <button class="btn btn-muted" >Fechar Contrato</button>
                     </form>
                 </div>
                 <div class="tab-pane" id="inserir_veiculo">
@@ -331,13 +325,19 @@
             var status_abrir_contrato = <%= request.getAttribute("status_abrir_contrato")%>
             var status_abrir_contrato_err = <%= request.getAttribute("status_abrir_contrato_err")%>
             
+            var status_fechar_contrato = <%= request.getAttribute("status_fechar_contrato")%>
+            
             var status_cadastro_veiculo = <%= request.getAttribute("status_cadastro_veiculo")%>
             var status_cadastro_veiculo_err = <%= request.getAttribute("status_cadastro_veiculo_err")%>
             
     
             var listaCarrosDisponiveis = <%= request.getAttribute("jsonListaCarrosDisponiveis")%>
             var listaCarrosNaoDisponiveis = <%= request.getAttribute("jsonListaCarrosNaoDisponiveis")%>
-            
+
+            if(status_fechar_contrato){
+                alert("contrato fechado com sucesso!")
+            }
+    
             if(status_abrir_contrato){
                 alert("contrato gerado com sucesso!")
             }

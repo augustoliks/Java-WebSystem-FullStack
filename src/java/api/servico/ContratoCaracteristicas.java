@@ -17,6 +17,6 @@ import org.joda.time.DateTime;
 public interface ContratoCaracteristicas {
 
     public boolean abrirContrato(Contrato contrato);
-    public boolean fecharContrato(Contrato contrato);
+    public boolean fecharContrato(Contrato contrato, int kilometragemPercorrida, int estadoConservacao);
     
 }

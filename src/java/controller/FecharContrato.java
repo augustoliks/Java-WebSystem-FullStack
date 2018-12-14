@@ -29,6 +29,20 @@ import org.joda.time.format.DateTimeFormatter;
  */
 @WebServlet(name = "FecharContrato", urlPatterns = {"/FecharContrato"})
 public class FecharContrato extends HttpServlet {
+    
+    
+     public DateTime converterData(String dataPadraoUSA){
+           
+        DateTimeFormatter formatterInput = DateTimeFormat.forPattern("yyyy-MM-dd");
+        
+        DateTime dataUSA = formatterInput.parseDateTime(dataPadraoUSA);
+        String dataQuebrada[] = dataPadraoUSA.split("-");
+        
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy");
+        DateTime dataFormatada = formatter.parseDateTime(dataQuebrada[2]+"/"+dataQuebrada[1]+"/"+dataQuebrada[0]);
+        
+        return dataFormatada;
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -40,26 +54,35 @@ public class FecharContrato extends HttpServlet {
         }
         
         ContratoCaracteristicas contratoImpl;
+        ServletContext sc = request.getServletContext();
+
         
         contratoImpl = new ContratoServico();
         Contrato contrato = new Contrato();
         
         int idContrato = Integer.valueOf(request.getParameter("id_contrato"));
-
-        String descricao = request.getParameter("descricao");
+        int kilometragemPercorrida = Integer.valueOf(request.getParameter("kilometragem_percorrida"));
+        int estadoConservacao = Integer.valueOf(request.getParameter("estadoConservacao"));
+        
         String dataHoraDevolucao = request.getParameter("data_devolucao");
-
         DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy");
         
-        DateTime dataHoraDevolucaoFormatada = formatter.parseDateTime(dataHoraDevolucao);        
+        DateTime dataHoraDevolucaoFormatada = converterData(dataHoraDevolucao);
 
         contrato.setDataHoraDevolucao(dataHoraDevolucaoFormatada);
         contrato.setId(idContrato);
-        contrato.setDescricaoAcrescimo(descricao);
         
-        boolean status = contratoImpl.fecharContrato(contrato);
+        boolean status = contratoImpl.fecharContrato(contrato, kilometragemPercorrida, estadoConservacao);
         
-        
+        if(status){
+            
+            sc.getRequestDispatcher("/jsp/admin.jsp").forward(request, response);
+        }else{
+            
+            request.setAttribute("status_fechar_contrato", 1);
+            sc.getRequestDispatcher("/jsp/admin.jsp").forward(request, response);
+        }
+               
     }
 
 }

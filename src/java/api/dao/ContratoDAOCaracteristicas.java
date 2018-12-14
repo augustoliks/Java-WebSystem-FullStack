@@ -7,6 +7,7 @@ package api.dao;
 
 import api.model.Contrato;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -17,6 +18,8 @@ public interface ContratoDAOCaracteristicas {
     public void insert(Contrato contrato) throws SQLException;
     public Contrato findById(int idContrato) throws SQLException;
     public void update(Contrato contrato) throws SQLException;
+    public List findAll() throws SQLException;
+    
     
 
 }

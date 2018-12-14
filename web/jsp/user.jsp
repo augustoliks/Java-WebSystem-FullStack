@@ -26,7 +26,7 @@
         <div class="row">
             <div class="col-md-6 mt-1">
                 <button class="btn btn-light logout" style="color:#000000" ><i class="fas fa-home"></i></button>
-                <button class="btn btn-danger" data-toggle="modal" data-target="#meus_pedidos">Meus Pedidos</button>
+                <!--<button class="btn btn-danger" data-toggle="modal" data-target="#meus_pedidos">Meus Pedidos</button>-->
             </div>
             
             <!--    MEUS PEDIDOS    -->

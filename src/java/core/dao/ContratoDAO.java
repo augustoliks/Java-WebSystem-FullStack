@@ -12,9 +12,12 @@ import api.model.ConexaoDB;
 import api.model.Contrato;
 import api.model.Operador;
 import api.model.Reserva;
+import api.model.Veiculo;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.joda.time.DateTime;
@@ -23,12 +26,13 @@ import org.joda.time.DateTime;
  *
  * @author visita
  */
-public class ContratoDAO implements ContratoDAOCaracteristicas{
+public class ContratoDAO implements ContratoDAOCaracteristicas {
+
     ConexaoDB conexaoDB;
-    
+
     @Override
-    public void insert(Contrato contrato) throws SQLException{
-    
+    public void insert(Contrato contrato) throws SQLException {
+
         try {
             this.conexaoDB = new ConexaoDB();
         } catch (IOException ex) {
@@ -39,36 +43,37 @@ public class ContratoDAO implements ContratoDAOCaracteristicas{
 
         conexaoDB.preparedStatement = conexaoDB.conexao.prepareStatement(""
                 + "insert into CONTRATO("
-                    + "fk_reserva,"
-                    + "fk_operador,"
-                    + "data_hora_retirada,"
-                    + "data_hora_devolucao,"    
-                    + "valor_total_reserva,"
-                    + "valor_pago_antecipadamente"
+                + "fk_reserva,"
+                + "fk_operador,"
+                + "data_hora_retirada,"
+                + "data_hora_devolucao,"
+                + "valor_total_reserva,"
+                + "valor_pago_antecipadamente"
                 + ") "
                 + "values("
-                    + "?, "
-                    + "?, "
-                    + "?, "
-                    + "?, "
-                    + "?, "
-                    + "?"
+                + "?, "
+                + "?, "
+                + "?, "
+                + "?, "
+                + "?, "
+                + "?"
                 + ");");
 
         conexaoDB.preparedStatement.setInt(1, contrato.getReserva().getId());
         conexaoDB.preparedStatement.setInt(2, contrato.getOperador().getId());
-        conexaoDB.preparedStatement.setDate(3, new java.sql.Date( contrato.getDataHoraRetirada().toDate().getTime() ));
-        
+        conexaoDB.preparedStatement.setDate(3, new java.sql.Date(contrato.getDataHoraRetirada().toDate().getTime()));
+
         try {
-            conexaoDB.preparedStatement.setDate(4, new java.sql.Date( contrato.getDataHoraDevolucao().toDate().getTime() ));
+            conexaoDB.preparedStatement.setDate(4, new java.sql.Date(contrato.getDataHoraDevolucao().toDate().getTime()));
         } catch (Exception e) {
             conexaoDB.preparedStatement.setNull(4, Types.DATE);
         }
-        
+
         conexaoDB.preparedStatement.setFloat(5, contrato.getValorTotalReserva());
         conexaoDB.preparedStatement.setFloat(6, contrato.getValorPagoAntecipadamente());
-        
+
         conexaoDB.preparedStatement.executeQuery();
+        conexaoDB.fecharConexao();
 
     }
 
@@ -80,7 +85,7 @@ public class ContratoDAO implements ContratoDAOCaracteristicas{
         } catch (IOException ex) {
             Logger.getLogger(CategoriaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         conexaoDB.conectarBD();
         conexaoDB.preparedStatement = conexaoDB.conexao.prepareStatement("SELECT * FROM Koyota.CONTRATO WHERE pk_contrato = ?");
 
@@ -88,23 +93,34 @@ public class ContratoDAO implements ContratoDAOCaracteristicas{
         conexaoDB.resultSet = conexaoDB.preparedStatement.executeQuery();
 
         Contrato contratoBD = new Contrato();
-        
+
         contratoBD.setReserva(new Reserva());
         contratoBD.setOperador(new Operador());
-        
+
         while (conexaoDB.resultSet.next()) {
             contratoBD.setId(conexaoDB.resultSet.getInt("pk_contrato"));
             contratoBD.getReserva().setId(conexaoDB.resultSet.getInt("fk_reserva"));
             contratoBD.getOperador().setId(conexaoDB.resultSet.getInt("fk_operador"));
-            contratoBD.setDataHoraRetirada(new DateTime(conexaoDB.resultSet.getDate("data_hora_retirada")));
-            contratoBD.setDataHoraDevolucao(new DateTime(conexaoDB.resultSet.getDate("data_hora_devolucao")));
+
+            if (conexaoDB.resultSet.getDate("data_hora_retirada") != null) {
+                contratoBD.setDataHoraRetirada(new DateTime(conexaoDB.resultSet.getDate("data_hora_retirada")));
+            } else {
+                contratoBD.setDataHoraRetirada(null);
+            }
+
+            if (conexaoDB.resultSet.getDate("data_hora_devolucao") != null) {
+                contratoBD.setDataHoraDevolucao(new DateTime(conexaoDB.resultSet.getDate("data_hora_devolucao")));
+            } else {
+                contratoBD.setDataHoraDevolucao(null);
+            }
+
             contratoBD.setValorTotalReserva(conexaoDB.resultSet.getFloat("valor_total_reserva"));
             contratoBD.setValorPagoAntecipadamente(conexaoDB.resultSet.getFloat("valor_pago_antecipadamente"));
             contratoBD.setValorAcrescimo(conexaoDB.resultSet.getFloat("valor_acrescimo"));
             contratoBD.setDescricaoAcrescimo(conexaoDB.resultSet.getString("descricao_acrescimo"));
-         }
+        }
         conexaoDB.fecharConexao();
-        
+
         return contratoBD;
 
     }
@@ -122,24 +138,76 @@ public class ContratoDAO implements ContratoDAOCaracteristicas{
 
         conexaoDB.preparedStatement = conexaoDB.conexao.prepareStatement(""
                 + "UPDATE CONTRATO SET "
-                    + "valor_acrescimo = ?"
-                    + ", "
-                    + "descricao_acrescimo = ?"
-                    + ", "
-                    + "data_hora_devolucao = ? "
-                    + ", "
-                    + "valor_total_reserva = ? "
-                    + "WHERE pk_contrato = ?"    
-                    + ";"
-        ); 
+                + "valor_acrescimo = ?"
+                + ", "
+                + "descricao_acrescimo = ?"
+                + ", "
+                + "data_hora_devolucao = ? "
+                + ", "
+                + "valor_total_reserva = ? "
+                + "WHERE pk_contrato = ?"
+                + ";"
+        );
 
         conexaoDB.preparedStatement.setFloat(1, contrato.getValorAcrescimo());
         conexaoDB.preparedStatement.setString(2, contrato.getDescricaoAcrescimo());
-        conexaoDB.preparedStatement.setDate(3, new java.sql.Date( contrato.getDataHoraDevolucao().toDate().getTime() ) );
+        conexaoDB.preparedStatement.setDate(3, new java.sql.Date(contrato.getDataHoraDevolucao().toDate().getTime()));
         conexaoDB.preparedStatement.setFloat(4, contrato.getValorTotalReserva());
         conexaoDB.preparedStatement.setInt(5, contrato.getId());
-        
+
         conexaoDB.preparedStatement.executeQuery();
-        
-    }    
+        conexaoDB.fecharConexao();
+    }
+
+    @Override
+    public List findAll() throws SQLException {
+
+        try {
+            conexaoDB = new ConexaoDB();
+        } catch (IOException ex) {
+            Logger.getLogger(CategoriaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        conexaoDB.conectarBD();
+        conexaoDB.preparedStatement = conexaoDB.conexao.prepareStatement("SELECT * FROM Koyota.CONTRATO");
+
+        conexaoDB.resultSet = conexaoDB.preparedStatement.executeQuery();
+
+        List<Contrato> contratos = new ArrayList<>();
+
+        while (conexaoDB.resultSet.next()) {
+            Contrato contratoBD = new Contrato();
+
+            contratoBD.setReserva(new Reserva());
+            contratoBD.setOperador(new Operador());
+
+            contratoBD.setId(conexaoDB.resultSet.getInt("pk_contrato"));
+            contratoBD.getReserva().setId(conexaoDB.resultSet.getInt("fk_reserva"));
+            contratoBD.getOperador().setId(conexaoDB.resultSet.getInt("fk_operador"));
+
+            if (conexaoDB.resultSet.getDate("data_hora_retirada") != null) {
+                contratoBD.setDataHoraRetirada(new DateTime(conexaoDB.resultSet.getDate("data_hora_retirada")));
+            } else {
+                contratoBD.setDataHoraRetirada(null);
+            }
+
+            if (conexaoDB.resultSet.getDate("data_hora_devolucao") != null) {
+                contratoBD.setDataHoraDevolucao(new DateTime(conexaoDB.resultSet.getDate("data_hora_devolucao")));
+            } else {
+                contratoBD.setDataHoraDevolucao(null);
+            }
+
+            contratoBD.setValorTotalReserva(conexaoDB.resultSet.getFloat("valor_total_reserva"));
+            contratoBD.setValorPagoAntecipadamente(conexaoDB.resultSet.getFloat("valor_pago_antecipadamente"));
+            contratoBD.setValorAcrescimo(conexaoDB.resultSet.getFloat("valor_acrescimo"));
+            contratoBD.setDescricaoAcrescimo(conexaoDB.resultSet.getString("descricao_acrescimo"));
+
+            contratos.add(contratoBD);
+        }
+
+        conexaoDB.fecharConexao();
+
+        return contratos;
+
+    }
 }

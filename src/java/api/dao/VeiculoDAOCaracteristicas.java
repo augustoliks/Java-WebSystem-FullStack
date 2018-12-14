@@ -18,4 +18,5 @@ public interface VeiculoDAOCaracteristicas {
     public List findCarsByCategoria(int categoriaID) throws SQLException;
     public Veiculo findById(int idVeiculo) throws SQLException;
     public List findAll() throws SQLException;
+    public void update(Veiculo veiculo) throws SQLException;
 }

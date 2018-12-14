@@ -25,10 +25,10 @@
 
     <body>
 
-        <div>
+<!--        <div>
             <input type="text" width="20%" placeholder="Pesquise koyata" class="inputStyle">
             <i class="fas fa-search" style="margin-top:2px"></i>
-        </div>
+        </div>-->
 
         <img id="imagem_fundo" src="../static/images/koyata.png" class="center" style="margin-top:15%" data-aos="zoom-in">
 
